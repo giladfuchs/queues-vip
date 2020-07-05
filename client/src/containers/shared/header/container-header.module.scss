@@ -1,0 +1,62 @@
+@import "../../../models/style/main.scss";
+
+.Header {
+  width: 85vw;
+  height: 8vh;
+  background-color: $purple;
+  margin-right: auto;
+
+  @include respond(phone) {
+    width: 100vw;
+    margin-right: 0;
+  }
+
+  @include respond(tab-900) {
+    height: 10vh;
+  }
+
+  & .Title {
+    margin: 0;
+    text-align: right;
+    margin-right: 40px;
+    color: $text-body;
+    font-size: $big-size;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 0;
+    font-weight: 500;
+
+    @include respond(phone) {
+      text-align: center;
+    }
+  }
+  & .SubTitle {
+    margin: 0;
+    text-align: right;
+    margin-right: 40px;
+    color: $text-body;
+    opacity: 0.6;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 0;
+
+    @include respond(phone) {
+      display: none;
+    }
+  }
+}
+
+//error
+
+.Error {
+  color: $error;
+  margin: 19px 0;
+
+  // margin-right: 40px;
+  animation: fade-right 0.3s linear;
+
+  &::before {
+    content: "שגיאה: ";
+    font-weight: 500;
+  }
+}
