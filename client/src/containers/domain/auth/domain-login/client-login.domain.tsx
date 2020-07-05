@@ -52,12 +52,10 @@ const DomainLogin: React.FC<Props> = (props) => {
 
     useEffect(() => {
 
+        const url = props.match.params.domain;
+        props.isLogin && setRedirect(
+            <Redirect to={url} />)
 
-        if (props.isLogin) {
-            const url = props.match.params.domain;
-            setRedirect(
-                <Redirect to={url} />)
-        }
     }, [props.isLogin]);
 
 

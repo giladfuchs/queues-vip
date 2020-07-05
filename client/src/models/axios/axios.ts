@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  // baseURL: "http://localhost:8080/",
-  baseURL: "https://queue-jz36q4rkyq-uc.a.run.app",
+  baseURL: "http://localhost:8080/",
+  // baseURL: "https://queue-jz36q4rkyq-uc.a.run.app",
   // baseURL: "https://34.69.25.108/",
 
   headers: {

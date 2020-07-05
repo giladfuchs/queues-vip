@@ -32,7 +32,7 @@ type Props = DispatchProps & StateProps & OwnProps;
 const SerivceComp: React.FC<Props> = (props) => {
     const { setModal, setServiceToUpdate } = props;
     const [Services, setServices] = useState<Service[]>();
-    const [header, setHeader] = useState<any>(null);
+    const [header, setHeader] = useState<JSX.Element>();
     useEffect(() => {
         setHeader(settingHeader())
     }, []);

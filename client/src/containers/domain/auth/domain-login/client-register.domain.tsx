@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from './business-login.module.scss'
 import { connect } from "react-redux";
-import { getLoading, getError, getIsTokenSet, } from "../../../../store/business/general/index";
+import { getLoading, getError, getIsTokenSet, getisLogin, } from "../../../../store/business/general/index";
 import Button from "../../../../models/ui/button/button";
 import { registerDomainClient, checkDomainIsValid, getIsValidDomain } from "../../../../store/business/auth/index";
 import { Redirect, RouteComponentProps } from "react-router-dom";
@@ -24,6 +24,7 @@ interface StateProps {
     error: string;
     isSetToken: boolean;
     isValidDomain: boolean
+    isLogin: boolean
 }
 
 interface DispatchProps {
@@ -72,7 +73,7 @@ const DomainRegister: React.FC<Props> = (props) => {
     useEffect(() => {
         // console.log( props.history.push());
         const url = props.match.params.domain;
-        setRedirect(
+        props.isLogin && setRedirect(
             <Redirect to={'/' + url} />)
     }, [props.isSetToken]);
 
@@ -117,7 +118,8 @@ const mapStateToProps = (state: any) => ({
     loading: getLoading(state),
     error: getError(state),
     isSetToken: getIsTokenSet(state),
-    isValidDomain: getIsValidDomain(state)
+    isValidDomain: getIsValidDomain(state),
+    isLogin: getisLogin(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
