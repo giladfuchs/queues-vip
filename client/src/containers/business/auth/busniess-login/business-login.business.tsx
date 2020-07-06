@@ -10,6 +10,7 @@ import * as language from "../../../../assets/language/language";
 import Inputs from "../../../../models/ui/input/inputs";
 
 import { password, phone } from "../../../../models/ui/input/utility/input-types.input";
+import { Form } from "../../../../models/system/input.field";
 
 
 interface FormState {
@@ -29,7 +30,7 @@ interface DispatchProps {
 
 type Props = DispatchProps & StateProps;
 const BusinessLogin: React.FC<Props> = (props) => {
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         phone,
         password
     });
@@ -39,7 +40,7 @@ const BusinessLogin: React.FC<Props> = (props) => {
     const onClickNext = () => {
         let ansForm = Object.assign(
             {},
-            ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+            ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
         );
         props.loginEmployee(ansForm);
     };
@@ -56,21 +57,18 @@ const BusinessLogin: React.FC<Props> = (props) => {
         <div className={classes.Register}>
             {redirect}
             <div
-                className={classes.Form2 + " " + classes.Form}
+                className={[classes.Form2, classes.Form].join(" ")}
             >
                 <AuthenticationHeadrer
                     title={language.loginEmployeeTitle[1]}
                     subTitle={language.loginSubTitle[1]}
                     error={error ? error : props.error}
                 />
-
                 <React.Fragment>
                     <div className={classes.Body}>
                         <Inputs
-                            Form={Form} setForm={setForm} error={error} setError={setError}
+                            form={form} setForm={setForm} error={error} setError={setError}
                         />
-
-
                     </div>
                     {!props.loading ? (
                         <React.Fragment>

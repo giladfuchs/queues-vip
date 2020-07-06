@@ -13,6 +13,7 @@ import * as language from "../../../../../assets";
 import Inputs from "../../../../../models/ui/input/inputs";
 
 import { password } from "../../../../../models";
+import { Form } from "../../../../../models/system/input.field";
 
 interface MatchParams {
   token: string;
@@ -31,7 +32,7 @@ interface DispatchProps {
 
 type Props = DispatchProps & StateProps & Params;
 const ResetEmployeePassword: React.FC<Props> = (props) => {
-  const [Form, setForm] = useState<any>({
+  const [form, setForm] = useState<Form>({
     password,
     confirmPassword: password
   });
@@ -43,15 +44,13 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
     const token = props.match.params.token;
     let ansForm = Object.assign(
       {},
-      ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+      ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
     );
-
-
 
     props.setNewPasswordEmployee(ansForm, token);
   };
 
-  const redirect = props.isLogin ? <Redirect to='' /> : null;
+  const redirect: JSX.Element | null = props.isLogin ? <Redirect to='' /> : null;
 
   return (
     <React.Fragment>
@@ -74,7 +73,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
 
               <div className={classes.Body}>
                 <Inputs
-                  Form={Form} setForm={setForm} error={error} setError={setError}
+                  form={form} setForm={setForm} error={error} setError={setError}
                 />
               </div>
 
@@ -98,7 +97,7 @@ const mapStateToProps = (state: any) => ({
   isLogin: getisLogin(state),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any, ) => ({
   setNewPasswordEmployee: (password: string, token: string) =>
     dispatch(setNewPasswordEmployee(password, token)),
 });

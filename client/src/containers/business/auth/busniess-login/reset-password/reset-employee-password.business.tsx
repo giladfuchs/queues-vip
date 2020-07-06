@@ -58,7 +58,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
             {props.error}
             <div className={classes.Body}>
               <Inputs
-                Form={Form} setForm={setForm} error={error} setError={setError}
+                form={Form} setForm={setForm} error={error} setError={setError}
               />
             </div>
 

@@ -57,7 +57,7 @@ const PhoneValidation: React.FC<Props> = (props) => {
 
 
 
-            <Inputs Form={Form} setForm={setForm} error={error} setError={setError}
+            <Inputs form={Form} setForm={setForm} error={error} setError={setError}
 
             />
 

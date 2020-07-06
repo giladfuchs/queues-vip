@@ -4,13 +4,20 @@ import Input from './input';
 
 import { checkValidity } from "./utility/validator.input";
 import { updateObject } from '../../../assets/utility/utility';
+import { Form } from '../../system/input.field';
+interface StateProps {
+    form: Form;
+    setForm: React.Dispatch<Form>;
+    error: string | undefined | null;
+    setError: React.Dispatch<string>;
+}
+const Inputs: React.FC<StateProps> = (props) => {
 
-const Inputs: React.FC<any> = (props: any) => {
-
-    const [timeOut, setTimeOut] = useState<any>(null);
+    const [timeOut, setTimeOut] = useState<ReturnType<typeof setTimeout>>();
 
 
-    const inputChanged = (form: any, e: any, inputIdentifier: any) => {
+    const inputChanged = (form: Form, e: React.ChangeEvent<HTMLInputElement>, inputIdentifier: string) => {
+
         if (!form[inputIdentifier].editable) return false;
         const updatedFormElement = updateObject(form[inputIdentifier], {
             value: e.target.value,
@@ -20,8 +27,6 @@ const Inputs: React.FC<any> = (props: any) => {
         const updatedForm = updateObject(form, {
             [inputIdentifier]: updatedFormElement,
         });
-
-        // true - valid , false - not valid
         const formIsValid = Object.keys(updatedForm).every(
             (e) => {
                 if (updatedForm[e].error.length > 0) return false;
@@ -36,8 +41,9 @@ const Inputs: React.FC<any> = (props: any) => {
 
 
 
-    const inputChangedHandler = (e: any, inputIdentifier: any) => {
-        const ans = inputChanged(props.Form, e, inputIdentifier);
+    const inputChangedHandler = (e: React.ChangeEvent<HTMLInputElement>, inputIdentifier: string) => {
+
+        const ans = inputChanged(props.form, e, inputIdentifier);
         if (!ans) return;
 
         props.setForm(ans.updatedForm);
@@ -52,10 +58,10 @@ const Inputs: React.FC<any> = (props: any) => {
             }
         }, 700))
     }
-    const formElementsArrayfunc = () => Object.keys(props.Form).map((key) => {
+    const formElementsArrayfunc = () => Object.keys(props.form).map((key) => {
         return {
             _id: key,
-            config: props.Form[key],
+            config: props.form[key],
         };
     }).map((formElement: any) => (
         <Input
@@ -74,10 +80,10 @@ const Inputs: React.FC<any> = (props: any) => {
         />
     ));
 
-    const [formElementsArray, setformElementsArray] = useState<any>(formElementsArrayfunc());
+    const [formElementsArray, setformElementsArray] = useState<JSX.Element[]>(formElementsArrayfunc());
     useMemo(() => {
         setformElementsArray(formElementsArrayfunc())
-    }, [props.Form,]);
+    }, [props.form,]);
 
     return (
         <div>

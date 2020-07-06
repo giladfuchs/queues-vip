@@ -76,7 +76,7 @@ const DomainLogin: React.FC<Props> = (props) => {
                 <React.Fragment>
                     <div className={classes.Body}>
                         <Inputs
-                            Form={Form} setForm={setForm} error={error} setError={setError}
+                            form={Form} setForm={setForm} error={error} setError={setError}
                         />
 
 

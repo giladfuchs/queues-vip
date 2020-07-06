@@ -7,7 +7,7 @@ const phonePattern = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 const numberPattern = /^\d+$/;
 // const url = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
 
-export const checkValidity = (value: any, rules: any) => {
+export const checkValidity = (value: string, rules: any) => {
   if (!rules) {
     return "";
   } else if (rules.required && !(value.trim() !== "")) {
@@ -24,17 +24,8 @@ export const checkValidity = (value: any, rules: any) => {
     return language.numberError[1];
   } else if (rules.minLen && value.length < rules.minLen) {
     return "שדה חייב להכיל לפחות " + rules.minLen + " תווים";
-  } else if (rules.biggerThenZero && value <= 0) {
+  } else if (rules.biggerThenZero && value.length <= 0) {
     return "שדה חייב להיות גדול מ- 0";
   }
   return "";
 };
-// export const validationEmployee = (employee: Employee, validPassword?: string) => {
-//     const phone = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
-//     if (employee.password !== validPassword) {
-//         return language.confirmPasswordError[1];
-//     } else if (!phone.test(employee.phone)) {
-//         return language.phoneError[1];
-//     }
-//     return '';
-// }

@@ -51,7 +51,7 @@ const NewQueue: React.FC<OwnProps> = (props) => {
             <Modal title="קביעת תור" close={props.close} footer={footer} >
 
                 <Inputs
-                    Form={Form} setForm={setForm} error={error} setError={setError}
+                    form={Form} setForm={setForm} error={error} setError={setError}
                 />
             </Modal>
         </div>

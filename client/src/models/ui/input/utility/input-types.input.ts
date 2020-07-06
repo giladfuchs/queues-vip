@@ -1,6 +1,7 @@
 import * as language from "../../../../assets/language/language";
+import { InputField } from "../../../system/input.field";
 
-export const password = {
+export const password: InputField = {
   elementType: "input",
   elementConfig: {
     type: "password",
@@ -15,13 +16,12 @@ export const password = {
   },
   valid: false,
   touched: false,
-  style: {},
   error: "",
   editable: true,
   class: "border",
 };
 
-export const phone = {
+export const phone: InputField = {
   elementType: "input",
   elementConfig: {
     type: "tel",
@@ -36,13 +36,12 @@ export const phone = {
   },
   valid: false,
   touched: false,
-  style: {},
   error: "",
   editable: true,
   class: "border",
 };
 
-export const plainText = {
+export const plainText: InputField = {
   elementType: "input",
   elementConfig: {
     type: "text",
@@ -57,13 +56,12 @@ export const plainText = {
   },
   valid: false,
   touched: false,
-  style: {},
   error: "",
   class: "border",
   editable: true,
 };
 
-export const domain = {
+export const domain: InputField = {
   elementType: "input",
   elementConfig: {
     type: "text",
@@ -79,13 +77,12 @@ export const domain = {
   },
   valid: false,
   touched: false,
-  style: {},
   error: "",
   class: "border",
   editable: true,
 };
 
-export const email = {
+export const email: InputField = {
   elementType: "input",
   elementConfig: {
     type: "email",

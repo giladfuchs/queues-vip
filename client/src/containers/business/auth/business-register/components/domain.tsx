@@ -75,7 +75,7 @@ const Domain: React.FC<Props> = (props) => {
 
             <div className={classes.BodyDomain}>
                 <Inputs
-                    Form={Form} setForm={setForm} error={error} setError={setError}
+                    form={Form} setForm={setForm} error={error} setError={setError}
                 />
             </div>
 

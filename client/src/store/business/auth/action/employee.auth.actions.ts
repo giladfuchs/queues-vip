@@ -1,11 +1,21 @@
+import { setDomainsActionType } from "./../auth.types";
+import {
+  startAuthActionType,
+  successAuthctionType,
+} from "./../../general/general.types";
 import { AuthActionsEnum } from "../auth.types";
 import API from "../../../../models/axios/axios";
 import { GeneralActionsEnum } from "../../general/general.types";
 import { Employee } from "../../../../models/system/persones";
 import { falidAuthErrorHandler } from "../../general/action/index.actions";
+import { Dispatch } from "react";
 
 export const getAllDomains = () => {
-  return async (dispatch: any) => {
+  return async (
+    dispatch: Dispatch<
+      startAuthActionType | successAuthctionType | setDomainsActionType
+    >
+  ) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
       const res = await API.get("business/auth/check");

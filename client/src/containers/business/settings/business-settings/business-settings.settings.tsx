@@ -149,7 +149,7 @@ const BusinessSettings: React.FC<Props> = (props) => {
                 <div className={BusinessSettingsStyle.Body}>
                     <div className={BusinessSettingsStyle.Details}>
                         <Inputs
-                            Form={Form} setForm={setForm} error={error} setError={setError}
+                            form={Form} setForm={setForm} error={error} setError={setError}
                         />
                         <SocialMediaLinks onChange={() => { }} Links={Links} iconColor="#7467ef" style={{ width: '300px' }} />
                     </div>

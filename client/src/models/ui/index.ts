@@ -1,4 +1,3 @@
-export * from "./autocomplete/autocomplete";
 export * from "./breadcrumbs/breadcrumbs";
 export * from "./button/button";
 export * from "./checkbox/checkbox";

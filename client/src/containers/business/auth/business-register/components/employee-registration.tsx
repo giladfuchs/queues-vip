@@ -99,7 +99,7 @@ const ManagerRegistration: React.FC<Props> = (props) => {
                     <div className={ManagerRegistrationStyle.Body}>
 
                         <Inputs
-                            Form={Form} setForm={setForm} error={error} setError={setError}
+                            form={Form} setForm={setForm} error={error} setError={setError}
 
                         />
                         {!props.loading ?

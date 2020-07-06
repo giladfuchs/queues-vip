@@ -10,6 +10,7 @@ import * as language from "../../../../assets/index";
 import Inputs from "../../../../models/ui/input/inputs";
 
 import { phone, plainText, Client } from "../../../../models/index";
+import { Form } from "../../../../models/system/input.field";
 
 
 interface MatchParams {
@@ -36,7 +37,7 @@ type Props = DispatchProps & StateProps & Params;
 const DomainRegister: React.FC<Props> = (props) => {
 
 
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         firstName: {
             ...plainText, elementConfig: {
                 type: "text",
@@ -53,6 +54,8 @@ const DomainRegister: React.FC<Props> = (props) => {
         },
         phone,
     });
+    console.log(form);
+    console.log(typeof form);
 
     const [error, setError] = useState<string>("");
 
@@ -61,7 +64,7 @@ const DomainRegister: React.FC<Props> = (props) => {
 
 
         const client = Object.assign({},
-            ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+            ...Object.keys(form).map((k: string) => ({ [k]: form[k].value }))
         );
 
 
@@ -93,7 +96,7 @@ const DomainRegister: React.FC<Props> = (props) => {
                 <React.Fragment>
                     <div className={classes.Body}>
                         <Inputs
-                            Form={Form} setForm={setForm} error={error} setError={setError}
+                            form={form} setForm={setForm} error={error} setError={setError}
                         />
 
 

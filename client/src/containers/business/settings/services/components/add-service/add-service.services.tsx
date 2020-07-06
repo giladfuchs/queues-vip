@@ -81,7 +81,7 @@ const AddService: React.SFC<OwnProps> = (props) => {
                 {showError && <p className={SerivcesSettingsStyle.Error}>{showError}</p>}
 
                 <Inputs
-                    Form={Form} setForm={setForm} error={error} setError={setError}
+                    form={Form} setForm={setForm} error={error} setError={setError}
                 />
 
                 <div className={AddServiceStyle.Available}>
