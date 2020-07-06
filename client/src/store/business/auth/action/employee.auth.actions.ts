@@ -1,14 +1,13 @@
-import { setDomainsActionType } from "../state/auth.types";
+import { Dispatch } from "react";
+
+import { AuthActionsEnum, setDomainsActionType } from "..";
 import {
+  GeneralActionsEnum,
   startAuthActionType,
   successAuthctionType,
-} from "../../general/state/general.types";
-import { AuthActionsEnum } from "../state/auth.types";
-import API from "../../../../models/axios/axios";
-import { GeneralActionsEnum } from "../../general/state/general.types";
-import { Employee } from "../../../../models/system/persones";
-import { falidAuthErrorHandler } from "../../general/action/index.actions";
-import { Dispatch } from "react";
+  falidAuthErrorHandler,
+} from "../../general";
+import { Employee, API } from "../../../../models";
 
 export const getAllDomains = () => {
   return async (

@@ -1,10 +1,7 @@
-import { Queue } from "./../../../../../models/system/event";
-import { ServiceListQueue } from "../../../../../models/system/service";
-import { dataActionsEnum } from "../../state/data.types";
-import API from "../../../../../models/axios/axios";
+import { Queue, API, ServiceListQueue } from "./../../../../../models";
+import { dataActionsEnum } from "../..";
 
-import { GeneralActionsEnum } from "../../../general/state/general.types";
-import { falidQueueErrorHandler } from "../../../general/action/index.actions";
+import { GeneralActionsEnum, falidQueueErrorHandler } from "../../../general";
 
 export const setServiceToQueue = (servicesList: ServiceListQueue) => {
   return async (dispatch: any) => {
@@ -42,8 +39,6 @@ export const setServiceToQueue = (servicesList: ServiceListQueue) => {
 export const updateScheduleWeek = (queue: Queue) => {
   return async (dispatch: any) => {
     try {
-      console.log(queue);
-
       dispatch({ type: GeneralActionsEnum.START_QUEUE });
       const res = await API.post(
         localStorage.getItem("domain") + "/calendar",
@@ -53,7 +48,6 @@ export const updateScheduleWeek = (queue: Queue) => {
         type: dataActionsEnum.UPDATE_MATRIX,
         queue,
       });
-      console.log(res.data);
       return dispatch({
         type: GeneralActionsEnum.SUCCESS_QUEUE,
       });

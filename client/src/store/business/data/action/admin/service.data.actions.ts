@@ -1,9 +1,7 @@
-import { Service } from "../../../../../models/system/service";
+import { Service, API } from "../../../../../models";
 import { dataActionsEnum } from "../../state/data.types";
-import API from "../../../../../models/axios/axios";
 
-import { GeneralActionsEnum } from "../../../general/state/general.types";
-import { falidServiceErrorHandler } from "../../../general/action/index.actions";
+import { falidServiceErrorHandler, GeneralActionsEnum } from "../../../general";
 
 export const postService = (service: Service) => {
   return async (dispatch: any) => {

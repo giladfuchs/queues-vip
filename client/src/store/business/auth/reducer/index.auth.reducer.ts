@@ -1,5 +1,4 @@
-import { initialAuthState } from "../state/auth.state";
-import * as actions from "../state/auth.types";
+import * as actions from "..";
 
 import * as employeeReducer from "./employee.auth.reducer";
 import * as domainReducer from "./domain.auth.reducer";
@@ -11,7 +10,7 @@ type allAuthActionTypes =
   | actions.domainIsValidActionType;
 
 export const authReducer = (
-  state = initialAuthState,
+  state = actions.initialAuthState,
   action: allAuthActionTypes
 ) => {
   switch (action.type) {

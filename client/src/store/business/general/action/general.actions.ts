@@ -1,6 +1,6 @@
 import { dataActionsEnum } from "../../data/state/data.types";
 import { GeneralActionsEnum } from "../state/general.types";
-import API from "../../../../models/axios/axios";
+import { API } from "../../../../models/axios/axios";
 
 import { AuthActionsEnum } from "../../auth/state/auth.types";
 import { falidAuthErrorHandler } from "./index.actions";
@@ -30,9 +30,7 @@ export const LoginCheck = () => {
           _id: res.data.employee._id,
           details: res.data.employee.details,
         };
-        const queues = res.data.queues.map((k: any) => {
-          return { [k.hour]: k };
-        });
+
         const mat = res.data.mat;
         const days = res.data.days;
 
@@ -69,11 +67,9 @@ export const LoginCheck = () => {
         const employee = res.data.employee.details;
         const services = res.data.services;
         const schedule = res.data.employee.schedule;
-        const queues = res.data.queues.map((k: any) => {
-          return { [k.hour]: k };
-        });
-        const mat = res.data.mat;
-        const days = res.data.days;
+
+        // const mat = res.data.mat;
+        // const days = res.data.days;
 
         dispatch({
           type: dataActionsEnum.SUCCESS_GET_ALL_DATA,

@@ -74,7 +74,7 @@ const DomainRegister: React.FC<Props> = (props) => {
         <div className={classes.Register}>
             {redirect}
             {props.isValidDomain ? <div
-                className={[classes.Form2, classes.Form].join('')}
+                className={[classes.Form2, classes.Form].join(" ")}
             >
                 <AuthenticationHeadrer
                     title={language.loginDomainTitle[1]}

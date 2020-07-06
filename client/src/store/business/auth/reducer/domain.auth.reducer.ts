@@ -1,7 +1,7 @@
-import * as actions from "../state/auth.types";
-import { updateObject } from "../../../../assets/utility/utility";
+import { AuthState } from "..";
+import { updateObject } from "../../../../assets";
 
-export const domainIsValid = (state: actions.AuthState) => {
+export const domainIsValid = (state: AuthState) => {
   return updateObject(state, {
     isValidDomain: true,
   });

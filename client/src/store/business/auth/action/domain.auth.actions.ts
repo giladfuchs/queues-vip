@@ -1,9 +1,6 @@
-import { AuthActionsEnum } from "../state/auth.types";
-import API from "../../../../models/axios/axios";
-
-import { GeneralActionsEnum } from "../../general/state/general.types";
-import { Client } from "../../../../models/system/persones";
-import { falidAuthErrorHandler } from "../../general/action/index.actions";
+import { AuthActionsEnum } from "..";
+import { API, Client } from "../../../../models";
+import { falidAuthErrorHandler, GeneralActionsEnum } from "../../general";
 
 export const registerDomainClient = (client: Client, domain: string) => {
   return async (dispatch: any) => {

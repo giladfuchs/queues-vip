@@ -63,7 +63,7 @@ const DomainLogin: React.FC<Props> = (props) => {
         <div className={classes.Register}>
             {redirect}
             <div
-                className={[classes.Form2, classes.Form].join('')}
+                className={[classes.Form2, classes.Form].join(" ")}
             >
                 <AuthenticationHeadrer
                     title={language.loginDomainTitle[1]}
