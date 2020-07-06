@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import classes from "../business-login.module.scss";
 import { connect } from "react-redux";
-import { getLoading, getError } from "../../../../../store/business/general/general.selectors";
-import Button from "../../../../../models/ui/button/button";
-import { resetPasswordEmployee } from "../../../../../store/business/auth/action/employee.auth.actions";
-import AuthenticationHeadrer from "../../../../shared/header/form-header";
+
+import classes from "../business-login.module.scss";
+
+import { AuthenticationHeadrer, Inputs, Button } from "../../../../../models/ui";
+
+import { getLoading, getError } from "../../../../../store/selectors";
+import { resetPasswordEmployee } from "../../../../../store";
+
 import * as language from "../../../../../assets/language/language";
-import Inputs from "../../../../../models/ui/input/inputs";
 import { phone } from "../../../../../models/ui/input/utility/input-types.input";
 
 interface StateProps {

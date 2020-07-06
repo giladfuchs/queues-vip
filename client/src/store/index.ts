@@ -16,3 +16,7 @@ export const errorApi = (error: {
   error.response && error.response.data
     ? error.response.data.message
     : error.message;
+
+export * from "./business/auth/index";
+export * from "./business/data/index";
+export * from "./business/general/index";

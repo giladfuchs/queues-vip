@@ -11,7 +11,7 @@ interface StateProps {
     error: string | undefined | null;
     setError: React.Dispatch<string>;
 }
-const Inputs: React.FC<StateProps> = (props) => {
+export const Inputs: React.FC<StateProps> = (props) => {
 
     const [timeOut, setTimeOut] = useState<ReturnType<typeof setTimeout>>();
 
@@ -94,4 +94,4 @@ const Inputs: React.FC<StateProps> = (props) => {
     );
 };
 
-export default Inputs;
+

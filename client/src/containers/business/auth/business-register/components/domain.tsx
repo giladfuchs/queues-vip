@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import classes from "./employee-registration.module.scss";
 import * as language from '../../../../../assets/language/language'
-import Button from '../../../../../models/ui/button/button';
-import { connect } from 'react-redux';
-import { getLoading, getError, } from '../../../../../store/business/general/general.selectors';
-import { getAllDomains } from '../../../../../store/business/auth/action/employee.auth.actions';
-import { getDomains } from '../../../../../store/business/auth/auth.selectors';
-import AuthenticationHeadrer from '../../../../shared/header/form-header';
-import Inputs from '../../../../../models/ui/input/inputs';
+import { Button, AuthenticationHeadrer, Inputs } from '../../../../../models/ui';
+import { getLoading, getError, getDomains } from '../../../../../store/selectors';
+import { getAllDomains } from '../../../../../store';
 import { domain } from '../../../../../models/ui/input/utility/input-types.input';
 import { incrementent } from '../../../../../store/business/general/action/index.actions';
 import { Form } from '../../../../../models/system/input.field';

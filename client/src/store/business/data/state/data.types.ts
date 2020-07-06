@@ -1,8 +1,8 @@
-import { Queue } from "./../../../models/system/event";
-import { Person } from "../../../models/system/persones";
-import { BusinessDetails } from "../../../models/system/business-details";
-import { Service } from "../../../models/system/service";
-import { Day } from "../../../models/system/day";
+import { Queue } from "../../../../models/system/event";
+import { Person } from "../../../../models/system/persones";
+import { BusinessDetails } from "../../../../models/system/business-details";
+import { Service } from "../../../../models/system/service";
+import { Day } from "../../../../models/system/day";
 
 export interface dataState {
   business: BusinessDetails;

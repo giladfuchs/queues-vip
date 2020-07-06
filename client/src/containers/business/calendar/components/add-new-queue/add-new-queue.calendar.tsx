@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import NewQueueStyle from './add-new-queue.module.scss';
-import Modal from '../../../../../models/ui/modal/modal';
-import Button from '../../../../../models/ui/button/button';
 import moment from 'moment';
+import NewQueueStyle from './add-new-queue.module.scss';
+import { Modal, Button, Inputs } from '../../../../../models/ui';
 import { plainText } from '../../../../../models/ui/input/utility/input-types.input';
-import Inputs from '../../../../../models/ui/input/inputs';
 
 interface OwnProps {
     close: () => void;

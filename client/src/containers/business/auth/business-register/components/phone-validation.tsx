@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
 
+import { aprroveRegisterFirstEmployee, decrement, incrementent } from "../../../../../store";
+import { getLoading, getError, getPerson } from "../../../../../store/selectors";
+
 import classes from './employee-registration.module.scss';
-import Button from '../../../../../models/ui/button/button';
+import { Button, Inputs } from '../../../../../models/ui';
 import * as language from '../../../../../assets/language/language';
-import { plainText } from '../../../../../models/ui/input/utility/input-types.input';
-import { aprroveRegisterFirstEmployee } from "../../../../../store/business/auth/action/employee.auth.actions";
-import { getLoading, getError, } from "../../../../../store/business/general/general.selectors";
-import { Employee, Person } from '../../../../../models/system/persones';
-import Inputs from '../../../../../models/ui/input/inputs';
-import { decrement, incrementent } from '../../../../../store/business/general/action/index.actions';
+
+import { Person, plainText, Form } from '../../../../../models';
 
 
-import { getPerson } from '../../../../../store/business/auth/auth.selectors'
-import { Form } from '../../../../../models/system/input.field';
 
 interface StateProps {
     loading: boolean;

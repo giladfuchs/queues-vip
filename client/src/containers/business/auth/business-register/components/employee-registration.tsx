@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as language from "../../../../../assets/language/language";
 import ManagerRegistrationStyle from "./employee-registration.module.scss";
-import Button from "../../../../../models/ui/button/button";
+import { Button, AuthenticationHeadrer, Inputs } from "../../../../../models/ui";
 import { registerFirstEmployee } from "../../../../../store/business/auth/action/employee.auth.actions";
-import { getLoading, getError } from "../../../../../store/business/general/general.selectors";
-import AuthenticationHeadrer from "../../../../shared/header/form-header";
+import { getLoading, getError } from "../../../../../store/selectors";
 import { plainText, phone, email, password } from "../../../../../models/ui/input/utility/input-types.input";
-import Inputs from "../../../../../models/ui/input/inputs";
 import { decrement, incrementent } from "../../../../../store/business/general/action/index.actions";
 import { Form } from "../../../../../models/system/input.field";
 

@@ -12,7 +12,7 @@ interface OwnProps {
     defaultValue?: any
 }
 
-const Options: React.FC<OwnProps> = (props) => {
+export const Options: React.FC<OwnProps> = (props) => {
     return (
         <div className={OptionsStyle.Options} style={props.style}>
             {props.title &&
@@ -36,4 +36,3 @@ const Options: React.FC<OwnProps> = (props) => {
 }
 
 
-export default Options;

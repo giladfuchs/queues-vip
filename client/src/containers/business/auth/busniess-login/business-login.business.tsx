@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import classes from './business-login.module.scss'
-import { connect } from "react-redux";
-import { getLoading, getError, getisLogin } from "../../../../store/business/general/general.selectors";
-import Button from "../../../../models/ui/button/button";
-import { loginEmployee } from "../../../../store/business/auth/action/employee.auth.actions";
 import { Link, Redirect } from "react-router-dom";
-import AuthenticationHeadrer from "../../../shared/header/form-header";
-import * as language from "../../../../assets/language/language";
-import Inputs from "../../../../models/ui/input/inputs";
+import { connect } from "react-redux";
 
-import { password, phone } from "../../../../models/ui/input/utility/input-types.input";
-import { Form } from "../../../../models/system/input.field";
+import classes from './business-login.module.scss'
+
+import { getLoading, getError, getisLogin } from "../../../../store/selectors";
+import { loginEmployee } from "../../../../store";
+
+import { Button, AuthenticationHeadrer, Inputs } from "../../../../models/ui";
+import * as language from "../../../../assets/language/language";
+
+import { password, phone, Form } from "../../../../models";
 
 
 interface FormState {

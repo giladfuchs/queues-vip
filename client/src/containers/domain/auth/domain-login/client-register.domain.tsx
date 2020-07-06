@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
-import classes from './business-login.module.scss'
-import { connect } from "react-redux";
-import { getLoading, getError, getIsTokenSet, getisLogin, } from "../../../../store/business/general/index";
-import Button from "../../../../models/ui/button/button";
-import { registerDomainClient, checkDomainIsValid, getIsValidDomain } from "../../../../store/business/auth/index";
 import { Redirect, RouteComponentProps } from "react-router-dom";
-import AuthenticationHeadrer from "../../../shared/header/form-header";
+import { connect } from "react-redux";
+
+import classes from './business-login.module.scss'
+import { Button, Inputs, AuthenticationHeadrer } from "../../../../models/ui";
+
+import { phone, plainText, Client, Form } from "../../../../models";
 import * as language from "../../../../assets/index";
-import Inputs from "../../../../models/ui/input/inputs";
 
-import { phone, plainText, Client } from "../../../../models/index";
-import { Form } from "../../../../models/system/input.field";
+import { checkDomainIsValid, registerDomainClient } from "../../../../store";
+import { getLoading, getError, getIsTokenSet, getisLogin, getIsValidDomain } from "../../../../store/selectors";
 
 
-interface MatchParams {
-    domain: string;
 
-}
-interface Params extends RouteComponentProps<MatchParams> { }
-
+interface Params extends RouteComponentProps<{ domain: string }> { }
 
 interface StateProps {
     loading: boolean;
@@ -79,7 +74,7 @@ const DomainRegister: React.FC<Props> = (props) => {
         <div className={classes.Register}>
             {redirect}
             {props.isValidDomain ? <div
-                className={classes.Form2 + " " + classes.Form}
+                className={[classes.Form2, classes.Form].join('')}
             >
                 <AuthenticationHeadrer
                     title={language.loginDomainTitle[1]}

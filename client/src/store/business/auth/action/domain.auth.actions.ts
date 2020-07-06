@@ -1,7 +1,7 @@
-import { AuthActionsEnum } from "../auth.types";
+import { AuthActionsEnum } from "../state/auth.types";
 import API from "../../../../models/axios/axios";
 
-import { GeneralActionsEnum } from "../../general/general.types";
+import { GeneralActionsEnum } from "../../general/state/general.types";
 import { Client } from "../../../../models/system/persones";
 import { falidAuthErrorHandler } from "../../general/action/index.actions";
 

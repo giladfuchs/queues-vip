@@ -1,4 +1,4 @@
-import { GeneralActionsEnum } from "../general.types";
+import { GeneralActionsEnum } from "../state/general.types";
 
 import { errorApi } from "../../..";
 

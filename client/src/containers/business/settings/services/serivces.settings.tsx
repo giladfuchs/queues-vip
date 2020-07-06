@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from "react-redux";
 import SerivcesSettingsStyle from './services.module.scss';
-import SettingsHeader from '../../../shared/header/container-header.shared';
-import { Service } from '../../../../models/system/service';
-import Button from '../../../../models/ui/button/button';
-import Breadcrumbs from '../../../../models/ui/breadcrumbs/breadcrumbs';
-import AddService from './components/add-service/add-service.services';
+
+import { postService, deleteService, updateService } from "../../../../store"
+import { getError, getLoading, getServices } from "../../../../store/selectors";
+
+import { Service } from '../../../../models';
+
+import { Button, SettingsHeader, Breadcrumbs } from '../../../../models/ui';
 import * as language from '../../../../assets/language/language'
-import { postService, deleteService, updateService } from "../../../../store/business/data/action/admin/admin.index.actions"
-import { getServices } from "../../../../store/business/data/data.selectors";
-import { getError, getLoading } from "../../../../store/business/general/general.selectors";
+
 import SerivceComp from './components/serivces.settings';
+import AddService from './components/add-service/add-service.services';
 
 interface StateProps {
-    services: any
+    services: Service[];
     loading: boolean;
     error: string;
 }

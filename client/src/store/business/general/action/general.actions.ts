@@ -1,8 +1,8 @@
-import { dataActionsEnum } from "../../data/data.types";
-import { GeneralActionsEnum } from "../general.types";
+import { dataActionsEnum } from "../../data/state/data.types";
+import { GeneralActionsEnum } from "../state/general.types";
 import API from "../../../../models/axios/axios";
 
-import { AuthActionsEnum } from "../../auth/auth.types";
+import { AuthActionsEnum } from "../../auth/state/auth.types";
 import { falidAuthErrorHandler } from "./index.actions";
 
 export const LoginCheck = () => {

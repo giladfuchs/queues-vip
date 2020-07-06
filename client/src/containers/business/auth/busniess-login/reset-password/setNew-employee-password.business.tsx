@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { RouteComponentProps, Redirect } from "react-router";
+import { connect } from "react-redux";
+
+import { getLoading, getError, getisLogin } from "../../../../../store/selectors";
+import { setNewPasswordEmployee } from "../../../../../store/business/auth";
 
 import classes from "../business-login.module.scss";
-import { connect } from "react-redux";
-import { getLoading, getError, getisLogin } from "../../../../../store/business/general/general.selectors";
 
-import Button from "../../../../../models/ui/button/button";
-import { setNewPasswordEmployee } from "../../../../../store/business/auth";
-import AuthenticationHeadrer from "../../../../shared/header/form-header";
+import { Button, AuthenticationHeadrer, Inputs } from "../../../../../models/ui";
 import * as language from "../../../../../assets";
 
-import Inputs from "../../../../../models/ui/input/inputs";
 
-import { password } from "../../../../../models";
-import { Form } from "../../../../../models/system/input.field";
+import { password, Form } from "../../../../../models";
 
 interface MatchParams {
   token: string;

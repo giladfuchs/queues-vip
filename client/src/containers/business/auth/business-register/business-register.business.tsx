@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import BusinessRegisterStyle from './business-register.module.scss';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getStep } from '../../../../store/business/general/general.selectors';
+import { getStep } from '../../../../store/selectors';
 import ManagerRegistration from './components/employee-registration';
 import Timeline from './components/timeline/timeline';
 import Domain from './components/domain';

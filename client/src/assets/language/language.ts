@@ -151,3 +151,13 @@ export const register = ["Add New Business", "הרשמה"];
 export const services = ["Add New Business", "שירותים"];
 export const calendar = ["Add New Business", "יומן תורים"];
 export const home = ["Add New Business", "בית"];
+
+export const FullHebDays = [
+  "ראשון",
+  "שני",
+  "שלישי",
+  "רביעי",
+  "חמישי",
+  "שישי",
+  "שבת",
+];

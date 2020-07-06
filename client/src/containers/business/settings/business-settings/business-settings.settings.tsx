@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from "react-redux";
+
 import BusinessSettingsStyle from './business-settings.module.scss';
-import SettingsHeader from '../../../shared/header/container-header.shared';
-import Breadcrumbs from '../../../../models/ui/breadcrumbs/breadcrumbs';
-import Inputs from '../../../../models/ui/input/inputs';
+import { postBusinessDetails } from "../../../../store"
+import { getBusiness, getError } from '../../../../store/selectors';
+
 import SocialMediaLinks from './social-media-links/social-media-links';
 import { postingImg } from '../../../../assets/images/export-images'
-import Button from '../../../../models/ui/button/button';
+import { Button, SettingsHeader, Inputs, Breadcrumbs } from '../../../../models/ui';
 import { ArrowNext } from '../../../../assets'
-import { plainText, phone, email, domain } from '../../../../models/ui/input/utility/input-types.input';
+import { plainText, phone, email, Form, BusinessDetails } from '../../../../models';
 import * as language from '../../../../assets/language/language';
 
 
-import { postBusinessDetails } from "../../../../store/business/data/action/admin/admin.index.actions"
-import { getError, getLoading } from "../../../../store/business/general/general.selectors";
-import { BusinessDetails } from '../../../../models/system/business-details';
-import { getBusiness } from '../../../../store/business/data/data.selectors';
-import { Form } from '../../../../models/system/input.field';
+
 
 interface StateProps {
     business: any

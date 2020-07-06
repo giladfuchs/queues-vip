@@ -1,8 +1,8 @@
-import { dataActionsEnum } from "../../data.types";
+import { dataActionsEnum } from "../../state/data.types";
 import API from "../../../../../models/axios/axios";
 import { errorApi } from "../../../..";
 import { Day } from "../../../../../models/system/day";
-import { GeneralActionsEnum } from "../../../general/general.types";
+import { GeneralActionsEnum } from "../../../general/state/general.types";
 import { falidBusineesDetailsErrorHandler } from "../../../general/action/index.actions";
 
 // Put and Post

@@ -8,7 +8,7 @@ interface OwnProps {
 
 }
 
-const SettingsHeader: React.FC<OwnProps> = (props) => {
+export const SettingsHeader: React.FC<OwnProps> = (props) => {
 
     return (
         <React.Fragment>
@@ -22,4 +22,3 @@ const SettingsHeader: React.FC<OwnProps> = (props) => {
     )
 }
 
-export default SettingsHeader;

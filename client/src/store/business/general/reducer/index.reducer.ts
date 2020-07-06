@@ -1,4 +1,4 @@
-import * as actions from "../general.types";
+import * as actions from "../state/general.types";
 import { initialGeneralState } from "../index";
 import * as actionReducer from "./general.reducer";
 type allAuthActionTypes =

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SwitchButtonStyle from './switch-button.module.scss';
 
 interface OwnProps {
@@ -7,16 +7,7 @@ interface OwnProps {
     id: number,
 }
 
-const SwitchButton: React.FC<OwnProps> = (props) => {
-    const [state, setState] = useState<boolean>(props.state)
-
-    const Switch = () => {
-
-        props.onChange(!state, props.id)
-
-        setState(state => !state);
-
-    }
+export const SwitchButton: React.FC<OwnProps> = (props) => {
 
     return (
         <label className={SwitchButtonStyle.Switch}>
@@ -26,5 +17,3 @@ const SwitchButton: React.FC<OwnProps> = (props) => {
     )
 }
 
-
-export default SwitchButton;

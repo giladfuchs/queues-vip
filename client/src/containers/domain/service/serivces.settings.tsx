@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback, JSXElementConstructor } from 'react';
+import { Redirect } from 'react-router';
 import { connect } from "react-redux";
+
 import SerivcesSettingsStyle from './services.module.scss';
 import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md';
 import { ArrowNext } from '../../../assets';
 import * as language from '../../../assets/index'
-import { setServiceToQueue } from "../../../store/business/data/index"
-import { getServices, getMat } from "../../../store/business/data/data.selectors";
-import { getError, getLoading } from "../../../store/business/general/general.selectors";
-import { Service, ServiceListQueue } from '../../../models/system/service';
-import Button from '../../../models/ui/button/button';
-import { Redirect } from 'react-router';
 
+import { setServiceToQueue } from "../../../store/index"
+import { getServices, getMat, getError, getLoading } from "../../../store/selectors";
 
+import { Service, ServiceListQueue } from '../../../models';
+import { Button } from '../../../models/ui';
 
 interface StateProps {
     services: Service[],
@@ -21,10 +21,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-
     setServiceToQueue: typeof setServiceToQueue;
-
-
 }
 type Props = DispatchProps & StateProps;
 
@@ -49,7 +46,7 @@ const SerivceComp: React.FC<Props> = (props) => {
     ), []);
 
     const [count, setCount] = useState(props.services
-        .reduce((json: any, k: Service) => { json[k._id] = 0; return json; }, {})
+        .reduce((json: any, s: Service) => { json[s._id] = 0; return json; }, {})
     );
     const increaseService = (_id: string) => {
         setError("")

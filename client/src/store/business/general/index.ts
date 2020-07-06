@@ -1,7 +1,6 @@
-export * from "./general.types";
-export * from "./general.state";
-export * from "./general.selectors";
-export * from "./reducer/index.reducer";
+export * from "./state/general.types";
+export * from "./state/general.state";
+export { generalReducer } from "./reducer/index.reducer";
 
 export * from "./action/general.actions";
 

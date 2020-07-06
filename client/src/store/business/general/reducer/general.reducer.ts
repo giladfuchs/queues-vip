@@ -1,4 +1,4 @@
-import * as actions from "../general.types";
+import * as actions from "../state/general.types";
 import { updateObject } from "../../../../assets/utility/utility";
 
 export const start = (state: actions.GeneralState) => {

@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import AddServiceStyle from './add-service.module.scss';
-import Modal from '../../../../../../models/ui/modal/modal';
-import Inputs from '../../../../../../models/ui/input/inputs';
-import Button from '../../../../../../models/ui/button/button';
-import { Service } from '../../../../../../models/system/service';
-import SwitchButton from '../../../../../../models/ui/switch-button/switch-button';
-import { plainText } from '../../../../../../models/ui/input/utility/input-types.input';
-import * as language from '../../../../../../assets/language/language';
-import SettingsHeader from '../../../../../shared/header/container-header.shared';
-import SerivcesSettingsStyle from '../../../../../shared/header/container-header.module.scss'
-import { Form } from '../../../../../../models/system/input.field';
+import SerivcesSettingsStyle from '../../../../../../models/ui/header/container-header.module.scss'
+
+import { Inputs, Button, SettingsHeader, SwitchButton, Modal } from '../../../../../../models/ui';
+import { Service, plainText, Form } from '../../../../../../models';
+import * as language from '../../../../../../assets/language/language'
+    ;
 interface OwnProps {
     close: () => void;
     fetchService: (service: Service | any) => void;

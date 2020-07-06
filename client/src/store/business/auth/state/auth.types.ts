@@ -1,4 +1,4 @@
-import { Client, Employee, Person } from "../../../models/system/persones";
+import { Person } from "../../../../models/system/persones";
 
 export interface AuthState {
   person: Person;

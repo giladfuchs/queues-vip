@@ -1,11 +1,11 @@
-import { setDomainsActionType } from "./../auth.types";
+import { setDomainsActionType } from "../state/auth.types";
 import {
   startAuthActionType,
   successAuthctionType,
-} from "./../../general/general.types";
-import { AuthActionsEnum } from "../auth.types";
+} from "../../general/state/general.types";
+import { AuthActionsEnum } from "../state/auth.types";
 import API from "../../../../models/axios/axios";
-import { GeneralActionsEnum } from "../../general/general.types";
+import { GeneralActionsEnum } from "../../general/state/general.types";
 import { Employee } from "../../../../models/system/persones";
 import { falidAuthErrorHandler } from "../../general/action/index.actions";
 import { Dispatch } from "react";
@@ -131,21 +131,3 @@ export const setNewPasswordEmployee = (password: string, token: string) => {
     }
   };
 };
-
-// export const registerEmployee = (employee: Employee) => {
-//   return async (dispatch: any) => {
-//     try {
-//       dispatch({ type: GeneralActionsEnum.START_AUTH });
-
-//       const res = await API.post("business/auth/register", employee);
-
-//       const token = res.data.token;
-//       localStorage.setItem("token", token);
-//       localStorage.setItem("isAdmin", "true");
-
-//       dispatch({ type: GeneralActionsEnum.SUCCESS_EMPLOYEE_LOGIN_AUTH });
-//     } catch (error) {
-//       falidAuthDetailsErrorHandler(dispatch, error);
-//     }
-//   };
-// };

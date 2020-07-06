@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import CalendarStyle from './calendar.module.scss';
-import moment from 'moment';
-import * as helper from './components/helper';
-import { Queue } from '../../../models/system/event';
-import Button from '../../../models/ui/button/button';
-import NewQueue from './components/add-new-queue/add-new-queue.calendar';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { getDurationOfNewQueue, getPrice } from '../../../store/business/data/data.selectors';
-import { Service } from '../../../models/system/service';
-import { getServices, getMat, getDays, getStartMinTime, getTimeDistance } from '../../../store/business/data/data.selectors';
+import moment from 'moment';
 
-import { getPerson } from '../../../store/business/auth/auth.selectors';
-import { Client } from '../../../models/system/persones';
-import { updateScheduleWeek } from '../../../store/business/data/action/client/queue.data.actions';
-import { getLoading } from '../../../store/business/general';
+import CalendarStyle from './calendar.module.scss';
+
+import { getDurationOfNewQueue, getPrice, getServices, getMat, getDays, getStartMinTime, getTimeDistance, getPerson, getLoading } from '../../../store/selectors';
+import { updateScheduleWeek } from '../../../store';
+
+import * as helper from './components/helper';
+import NewQueue from './components/add-new-queue/add-new-queue.calendar';
+
+import { Client, Service, Queue } from '../../../models/system';
 
 
 

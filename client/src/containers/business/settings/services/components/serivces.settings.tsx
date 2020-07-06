@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { connect } from "react-redux";
 import SerivcesSettingsStyle from '../services.module.scss';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { ArrowNext } from '../../../../../assets';
 import * as language from '../../../../../assets/language/language'
-import { deleteService } from "../../../../../store/business/data/action/admin/admin.index.actions"
-import { getServices, } from "../../../../../store/business/data/data.selectors";
-import { getIsAdmin, getError } from "../../../../../store/business/general/general.selectors";
+import { deleteService } from "../../../../../store"
+import { getIsAdmin, getError, getServices } from "../../../../../store/selectors";
 import { Service } from '../../../../../models/system/service';
-import Button from '../../../../../models/ui/button/button';
+import { Button } from '../../../../../models/ui';
 
 interface OwnProps {
     setModal: (flag: boolean) => void;

@@ -2,16 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from "react-redux";
 import HoursStyle from './opening-hours.module.scss';
 import * as days from '../../../../assets';
-import SettingsHeader from '../../../shared/header/container-header.shared';
-import Breadcrumbs from '../../../../models/ui/breadcrumbs/breadcrumbs';
-import SwitchButton from '../../../../models/ui/switch-button/switch-button';
-import Options from '../../../../models/ui/options/options';
 import { Day } from '../../../../models/system/day';
 import { ArrowNext } from '../../../../assets';
-import Button from '../../../../models/ui/button/button';
-import { postEmployeeSchedule } from "../../../../store/business/data/action/admin/admin.index.actions"
-import { getError } from "../../../..//store/business/general/general.selectors";
-import { getSchedule } from "../../../..//store/business/data/data.selectors";
+import { Button, SwitchButton, SettingsHeader, Options, Breadcrumbs } from '../../../../models/ui';
+import { postEmployeeSchedule } from "../../../../store"
+import { getSchedule, getError } from "../../../../store/selectors";
 import * as language from '../../../../assets/language/language';
 
 interface StateProps {

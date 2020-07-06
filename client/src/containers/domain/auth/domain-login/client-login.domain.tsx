@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import classes from './business-login.module.scss'
-import { connect } from "react-redux";
-import { getLoading, getError, getisLogin } from "../../../../store/business/general/index";
-import Button from "../../../../models/ui/button/button";
-import { loginDomainClient, checkDomainIsValid } from "../../../../store/business/auth/index";
 import { Redirect, RouteComponentProps } from "react-router-dom";
-import AuthenticationHeadrer from "../../../shared/header/form-header";
+import { connect } from "react-redux";
+
+
+import classes from './business-login.module.scss'
+import { Button, AuthenticationHeadrer, Inputs } from "../../../../models/ui";
+
 import * as language from "../../../../assets/index";
-import Inputs from "../../../../models/ui/input/inputs";
 
-import { phone } from "../../../../models/ui/input/utility/input-types.input";
-import { getIsValidDomain } from "../../../../store/business/auth";
+import { phone, Form } from "../../../../models";
 
+import { getLoading, getError, getisLogin, getIsValidDomain } from "../../../../store/selectors";
+import { loginDomainClient, checkDomainIsValid } from "../../../../store/business/auth/index";
 
 interface MatchParams {
     domain: string;
@@ -38,7 +38,7 @@ const DomainLogin: React.FC<Props> = (props) => {
     useEffect(() => {
         props.checkDomainIsValid(props.match.params.domain)
     }, []);
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         phone,
     });
 
@@ -46,9 +46,9 @@ const DomainLogin: React.FC<Props> = (props) => {
 
     const onClickNext = () => {
         const domain = props.match.params.domain;
-        props.loginDomainClient(domain, Form.phone.value);
+        props.loginDomainClient(domain, "" + form.phone.value);
     };
-    const [redirect, setRedirect] = useState<any>(null);
+    const [redirect, setRedirect] = useState<JSX.Element>();
 
     useEffect(() => {
 
@@ -59,13 +59,11 @@ const DomainLogin: React.FC<Props> = (props) => {
     }, [props.isLogin]);
 
 
-
-
     return (
         <div className={classes.Register}>
             {redirect}
             <div
-                className={classes.Form2 + " " + classes.Form}
+                className={[classes.Form2, classes.Form].join('')}
             >
                 <AuthenticationHeadrer
                     title={language.loginDomainTitle[1]}
@@ -76,12 +74,11 @@ const DomainLogin: React.FC<Props> = (props) => {
                 <React.Fragment>
                     <div className={classes.Body}>
                         <Inputs
-                            form={Form} setForm={setForm} error={error} setError={setError}
+                            form={form} setForm={setForm} error={error} setError={setError}
                         />
 
 
                     </div>
-                    {/* {render || <p>mistake</p>} */}
                     {props.isValidDomain && !props.loading ? <React.Fragment>
                         <div className={classes.Button}>
                             <Button color="purple-register" onClick={() => onClickNext()} disabled={error === ""}>התחבר</Button>

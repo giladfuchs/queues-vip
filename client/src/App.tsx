@@ -2,12 +2,11 @@ import React, { useEffect, Suspense, useState } from 'react';
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { getisLogin, getIsAdmin, getIsTokenSet } from './store/business/general/general.selectors';
 
 
 import { History } from 'history';
 import Layout from './models/ui/Layout/layout';
-import { getIsValidDomain } from './store/business/auth/auth.selectors';
+import { getIsValidDomain, getisLogin, getIsAdmin, getIsTokenSet } from './store/selectors';
 import { LoginCheck } from './store/business/general/index';
 
 const DomainLoginClient = React.lazy(() => {
@@ -54,7 +53,7 @@ const EmployeeReset = React.lazy(() => {
 const SetNewEmployeePassword = React.lazy(() => { return import("./containers/business/auth/busniess-login/reset-password/setNew-employee-password.business") });
 
 const Home = React.lazy(() => {
-  return import("./containers/shared/header/home");
+  return import("./containers/shared/home");
 });
 
 interface DispatchProps {

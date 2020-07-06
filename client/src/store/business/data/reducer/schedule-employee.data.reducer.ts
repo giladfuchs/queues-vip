@@ -1,4 +1,4 @@
-import * as actions from "../data.types";
+import * as actions from "../state/data.types";
 import { updateObject } from "../../../../assets/utility/utility";
 
 export const successSetHours = (

@@ -1,5 +1,5 @@
-import { initialAuthState } from "../auth.state";
-import * as actions from "../auth.types";
+import { initialAuthState } from "../state/auth.state";
+import * as actions from "../state/auth.types";
 
 import * as employeeReducer from "./employee.auth.reducer";
 import * as domainReducer from "./domain.auth.reducer";

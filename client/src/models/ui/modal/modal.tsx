@@ -10,7 +10,7 @@ interface OwnProps {
   color?: 'purple' | 'orange' | 'purple-register';
 }
 
-const Modal: React.FC<OwnProps> = props => {
+export const Modal: React.FC<OwnProps> = props => {
 
   const color = props.color === 'purple' ? '#7467ef' : props.color === 'orange' ? '#ff9e43' : '#7b1fa2'
 
@@ -18,7 +18,7 @@ const Modal: React.FC<OwnProps> = props => {
   return (
     <div className={modalStyle.ModalBackground} onClick={props.close} >
       <div className={modalStyle.Modal} onClick={(e: any) => { e.stopPropagation(); }}>
-        <div className={modalStyle.Header} style={props.color ? {backgroundColor: color} : {}}>
+        <div className={modalStyle.Header} style={props.color ? { backgroundColor: color } : {}}>
           <h1>{props.title}</h1>
           <span onClick={props.close}>&times;</span>
         </div>
@@ -32,5 +32,3 @@ const Modal: React.FC<OwnProps> = props => {
     </div>
   );
 };
-
-export default Modal;

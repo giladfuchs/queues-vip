@@ -9,7 +9,7 @@ interface OwnProps {
   style?: {}
 }
 
-const Button: React.FC<OwnProps> = (props) => {
+export const Button: React.FC<OwnProps> = (props) => {
   const color =
     props.color === "purple"
       ? "#7467ef"
@@ -35,4 +35,3 @@ const Button: React.FC<OwnProps> = (props) => {
   );
 };
 
-export default Button;

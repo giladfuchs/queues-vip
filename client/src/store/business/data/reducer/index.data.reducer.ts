@@ -3,9 +3,9 @@ import {
   successUpadateService,
   successDeleteService,
 } from "./service.data.reducer";
-import { initialDataState } from "../data.state";
+import { initialDataState } from "../state/data.state";
 
-import * as actions from "../data.types";
+import * as actions from "../state/data.types";
 import { updateObject } from "../../../../assets/utility/utility";
 import { successSetHours } from "./schedule-employee.data.reducer";
 import { successSetDetails } from "./business-details.data.reducer";

@@ -6,7 +6,7 @@ interface OwnProps {
     subTitle: string,
     error: string | null,
 }
-const AuthenticationHeadrer: React.FC<OwnProps> = (props) => {
+export const AuthenticationHeadrer: React.FC<OwnProps> = (props) => {
     return (
         <React.Fragment>
             <div className={AuthenticationHeadrerStyle.Header}>
@@ -23,4 +23,3 @@ const AuthenticationHeadrer: React.FC<OwnProps> = (props) => {
 }
 
 
-export default AuthenticationHeadrer;
