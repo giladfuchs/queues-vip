@@ -13,6 +13,7 @@ import { decrement, incrementent } from '../../../../../store/business/general/a
 
 
 import { getPerson } from '../../../../../store/business/auth/auth.selectors'
+import { Form } from '../../../../../models/system/input.field';
 
 interface StateProps {
     loading: boolean;
@@ -31,7 +32,7 @@ const PhoneValidation: React.FC<Props> = (props) => {
 
     const [error, setError] = useState<string>();
 
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         authPass: {
             ...plainText, label: language.codeVerification[1], style: { width: '50%', margin: 'auto' }
             , value: props.person.details.firstName
@@ -39,30 +40,19 @@ const PhoneValidation: React.FC<Props> = (props) => {
     })
 
     const onClickNext = () => {
-
-
-        let ansForm = Object.assign({},
-            ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+        const ansForm = Object.assign({},
+            ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
         );
-
-
         const _id = props.person._id;
         props.aprroveRegisterFirstEmployee({ ...ansForm, _id })
-
     };
 
     return (
         <div className={classes.PhoneValidation}>
-
-
-
-
-            <Inputs form={Form} setForm={setForm} error={error} setError={setError}
-
+            <Inputs form={form} setForm={setForm} error={error} setError={setError}
             />
 
             <div className={classes.ButtonsPhoneValidation}>
-
                 <React.Fragment>
                     <Button color="orange" onClick={() => props.decrement()} disabled={true}>{language.changeNumber[1]}</Button>
                     <Button color="purple-register" onClick={onClickNext} disabled={true} >{language.next[1]}</Button>

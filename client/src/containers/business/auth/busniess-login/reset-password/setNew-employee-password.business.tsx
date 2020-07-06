@@ -57,7 +57,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
       <div className={classes.Register}>
         {redirect}
         <div
-          className={classes.Form2 + " " + classes.Form}
+          className={[classes.Form2, classes.Form].join('')}
         >
           <AuthenticationHeadrer
             title={language.restPasswordTitle[1]}
@@ -97,7 +97,7 @@ const mapStateToProps = (state: any) => ({
   isLogin: getisLogin(state),
 });
 
-const mapDispatchToProps = (dispatch: any, ) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   setNewPasswordEmployee: (password: string, token: string) =>
     dispatch(setNewPasswordEmployee(password, token)),
 });

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from "react-redux";
 import HoursStyle from './opening-hours.module.scss';
 import * as days from '../../../../assets';
-import * as hours from '../../../../assets';
 import SettingsHeader from '../../../shared/header/container-header.shared';
 import Breadcrumbs from '../../../../models/ui/breadcrumbs/breadcrumbs';
 import SwitchButton from '../../../../models/ui/switch-button/switch-button';
@@ -26,10 +25,9 @@ interface DispatchProps {
 type Props = DispatchProps & StateProps;
 
 
-
 const OpeningHours: React.FC<Props> = (props) => {
     const [Flag, setFlag] = useState<boolean>(false);
-    const [Hours, setHours] = useState<any>({
+    const [Hours, setHours] = useState<Day>({
         "0": [],
         "1": [],
         "2": [],
@@ -38,37 +36,34 @@ const OpeningHours: React.FC<Props> = (props) => {
         "5": [],
         "6": []
     })
-    const [header, setHeader] = useState<any>(null);
-    const [anotherHeader, setanotherHeader] = useState<any>(null);
-
     useEffect(() => {
-
         props.schedule && setHours({ ...Hours, ...props.schedule })
         setFlag(true)
-        settingHeader()
+        setHeader()
     }, []);
-    const settingHeader = useCallback(() => {
-        setHeader(<div>
+    const setHeader = useCallback(() =>
+        (<div>
             <SettingsHeader title={language.hoursHeaderTitle[1]} subTitle={language.hoursHeaderSubTitle[1]} />
             <Breadcrumbs title={language.hoursHeaderTitle[1]} />
 
         </div>
-        );
-        setanotherHeader(<div className={HoursStyle.Days}>
+        )
+        , []);
+    const setAnotherHeader = useCallback(() =>
+
+        (<div className={HoursStyle.Days}>
             {days.FullHebDays.map((d: string, i: number) =>
                 <p key={Math.random()} className={HoursStyle.Day} >{d}</p>
             )}
         </div>
-
         )
-        return
-    }, []);
+        , []);
+    const header = useState<JSX.Element>(setHeader());
+    const [anotherHeader] = useState<JSX.Element>(setAnotherHeader());
 
-    const onChangeHour = (e: any, arg: string) => {
-
+    const onChangeHour = (e: React.ChangeEvent<HTMLInputElement>, arg: string) => {
         const a = arg.split(',');
         const hour = e.target.value;
-
         const time = a[1] == "end" ? 'end' : 'start';
         const day = +a[0];
 
@@ -101,8 +96,6 @@ const OpeningHours: React.FC<Props> = (props) => {
             {days.FullHebDays.map((d: string, i: number) => {
 
                 const isAvailable = Hours[i].length > 0;
-
-
                 return (
                     <div key={Math.random()} className={HoursStyle.DayContent}>
                         <p className={HoursStyle.Day} >{d}</p>

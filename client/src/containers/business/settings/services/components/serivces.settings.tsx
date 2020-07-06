@@ -16,7 +16,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-    services: any
+    services: Service[];
     error: string,
     isAdmin: boolean
 }
@@ -31,11 +31,8 @@ type Props = DispatchProps & StateProps & OwnProps;
 
 const SerivceComp: React.FC<Props> = (props) => {
     const { setModal, setServiceToUpdate } = props;
-    const [Services, setServices] = useState<Service[]>();
-    const [header, setHeader] = useState<JSX.Element>();
-    useEffect(() => {
-        setHeader(settingHeader())
-    }, []);
+    const [Services, setServices] = useState<JSX.Element[]>();
+
     const settingHeader = useCallback(() => (
         <thead className={SerivcesSettingsStyle.TableHeader}>
             <tr>
@@ -47,6 +44,7 @@ const SerivceComp: React.FC<Props> = (props) => {
             </tr>
         </thead>
     ), []);
+    const [header] = useState<JSX.Element>(settingHeader());
 
 
     useMemo(() => {
@@ -79,7 +77,6 @@ const SerivceComp: React.FC<Props> = (props) => {
 
     return (
         <React.Fragment>
-
 
             <div className={SerivcesSettingsStyle.Services}>
                 <table>

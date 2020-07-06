@@ -10,6 +10,7 @@ import AuthenticationHeadrer from '../../../../shared/header/form-header';
 import Inputs from '../../../../../models/ui/input/inputs';
 import { domain } from '../../../../../models/ui/input/utility/input-types.input';
 import { incrementent } from '../../../../../store/business/general/action/index.actions';
+import { Form } from '../../../../../models/system/input.field';
 
 
 
@@ -17,20 +18,19 @@ import { incrementent } from '../../../../../store/business/general/action/index
 interface StateProps {
     loading: boolean;
     error: string;
-    domains: []
+    domains: [string]
 }
 
 interface DispatchProps {
     getAllDomains: typeof getAllDomains;
     incrementent: typeof incrementent
-
 }
 
 
 
 type Props = DispatchProps & StateProps;
 const Domain: React.FC<Props> = (props) => {
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         domain: {
             ...domain,
             validation: {
@@ -47,16 +47,16 @@ const Domain: React.FC<Props> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (error === "" && !props.domains.every((d) => d !== Form.domain.value))
+        if (error === "" && !props.domains.every((d) => d !== form.domain.value))
             setError(language.domainError[1])
-    }, [Form]);
+    }, [form]);
 
 
     const onClickNext = () => {
         if (error !== '') return;
         let ansForm = Object.assign(
             {},
-            ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+            ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
         );
 
         localStorage.setItem("domain", ansForm.domain)
@@ -75,18 +75,15 @@ const Domain: React.FC<Props> = (props) => {
 
             <div className={classes.BodyDomain}>
                 <Inputs
-                    form={Form} setForm={setForm} error={error} setError={setError}
+                    form={form} setForm={setForm} error={error} setError={setError}
                 />
             </div>
 
-            {
-                !props.loading ?
-                    <div className={classes.ButtonDomain} onClick={onClickNext}>
-                        <Button color="purple-register" disabled={error === ''}>{language.next[1]}</Button>
-                    </div>
-                    :
-                    <div style={{ textAlign: 'center' }}>Loading...</div>
-            }
+            <div className={classes.ButtonDomain} onClick={onClickNext}>
+                <Button color="purple-register" disabled={error === ''}>{language.next[1]}</Button>
+            </div>
+
+
         </React.Fragment>
     )
 }

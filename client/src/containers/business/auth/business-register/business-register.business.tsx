@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import BusinessRegisterStyle from './business-register.module.scss';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getLoading, getError, getStep } from '../../../../store/business/general/general.selectors';
+import { getStep } from '../../../../store/business/general/general.selectors';
 import ManagerRegistration from './components/employee-registration';
 import Timeline from './components/timeline/timeline';
 import Domain from './components/domain';
@@ -10,19 +10,12 @@ import PhoneValidation from './components/phone-validation';
 
 
 interface StateProps {
-    loading: boolean;
-    error: Error;
-    step: number
+    step: any
 }
 
-interface DispatchProps {
-}
-
-type Props = DispatchProps & StateProps;
+type Props = StateProps;
 
 const BusinessRegister: React.FC<Props> = (props) => {
-
-
 
     useEffect(() => { }, [props.step]);
     return (
@@ -40,21 +33,14 @@ const BusinessRegister: React.FC<Props> = (props) => {
 
                 {props.step === 4 && <div>welcome</div>}
 
-
             </div>
 
         </div>
     )
 }
-
 const mapStateToProps = (state: any) => ({
-    loading: getLoading(state),
-    error: getError(state),
     step: getStep(state)
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
 
-});
-
-export default compose<any>(connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps))(BusinessRegister);
+export default compose<any>(connect<StateProps, null>(mapStateToProps, null))(BusinessRegister);

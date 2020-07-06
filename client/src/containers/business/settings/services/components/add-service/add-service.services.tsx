@@ -9,6 +9,7 @@ import { plainText } from '../../../../../../models/ui/input/utility/input-types
 import * as language from '../../../../../../assets/language/language';
 import SettingsHeader from '../../../../../shared/header/container-header.shared';
 import SerivcesSettingsStyle from '../../../../../shared/header/container-header.module.scss'
+import { Form } from '../../../../../../models/system/input.field';
 interface OwnProps {
     close: () => void;
     fetchService: (service: Service | any) => void;
@@ -19,7 +20,7 @@ interface OwnProps {
 const AddService: React.SFC<OwnProps> = (props) => {
     const [error, setError] = useState<string>("");
     const [Available, setAvailable] = useState(props.updateService ? props.updateService.available : true);
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
 
         title: {
             ...plainText, label: language.servicesHeaderTitle[1],
@@ -49,18 +50,14 @@ const AddService: React.SFC<OwnProps> = (props) => {
     const fetchService = () => {
         if (error) return;
 
-
         const _id = props.updateService ? props.updateService._id : null;
         const ansForm = Object.assign(
             _id ? { "available": Available, _id } : { "available": Available },
-            ...Object.keys(Form).map((k) => {
-                return ({ [k]: Form[k].value })
+            ...Object.keys(form).map((k) => {
+                return ({ [k]: form[k].value })
             }))
 
-
-
         props.fetchService(ansForm)
-
     }
 
     const Footer = () => (
@@ -70,7 +67,6 @@ const AddService: React.SFC<OwnProps> = (props) => {
     )
 
     const showError = error !== "" && error !== null ? error : props.error !== "" && props.error !== null ? props.error : null;
-    // props.error?props.error:
 
     return (
         <Modal title={language.addServiceHeaderTitle[1]} close={props.close} footer={<Footer />}>
@@ -81,7 +77,7 @@ const AddService: React.SFC<OwnProps> = (props) => {
                 {showError && <p className={SerivcesSettingsStyle.Error}>{showError}</p>}
 
                 <Inputs
-                    form={Form} setForm={setForm} error={error} setError={setError}
+                    form={form} setForm={setForm} error={error} setError={setError}
                 />
 
                 <div className={AddServiceStyle.Available}>
@@ -98,5 +94,3 @@ const AddService: React.SFC<OwnProps> = (props) => {
 export default AddService;
 
 
-/* formElement.id === "category" &&
-                            <Autocomplete wordsList={props.categories} word={Form.category.value} onCategoryClick={inputChangedHandler} /> */

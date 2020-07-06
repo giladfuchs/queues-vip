@@ -28,19 +28,15 @@ type Props = DispatchProps & StateProps;
 
 
 const SerivceSettings: React.FC<Props> = (props) => {
-    const [header, setHeader] = useState<any>(null);
 
     const [ServiceToUpdate, setServiceToUpdate] = useState<Service | null>(null)
-    const [Modal, setModal] = useState<any>(null);
+    const [Modal, setModal] = useState<boolean>(false);
 
-
-    useEffect(() => {
-        setHeader(settingHeader())
-    }, []);
 
     const settingHeader = useCallback(() => (
         <SettingsHeader title={language.settingTitleHeader[1]} subTitle={language.settingSubTitleHeader[1]} />
     ), []);
+    const [header] = useState<JSX.Element>(settingHeader());
 
 
     if (!Modal && ServiceToUpdate) setServiceToUpdate(null);
@@ -76,44 +72,3 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(SerivceSettings);
-
-// {
-//     id: '1',
-//     category: 'תספורת',
-//     title: 'תספורת גבר',
-//     price: 40,
-//     duration: 20,
-//     available: false
-// },
-// {
-//     id: '2',
-//     category: 'תספורת',
-//     title: 'תספורת אישה',
-//     price: 60,
-//     duration: 40,
-//     available: true
-// },
-// {
-//     id: '3',
-//     category: 'צבע',
-//     title: 'צבע אישה',
-//     price: 120,
-//     duration: 50,
-//     available: true
-// },
-// {
-//     id: '4',
-//     category: 'חפיפה',
-//     title: 'חפיפה',
-//     price: 20,
-//     duration: 5,
-//     available: true
-// },
-// {
-//     id: '5',
-//     category: 'חפיפה',
-//     title: 'חפיפה מושקעת',
-//     price: 40,
-//     duration: 70,
-//     available: true
-// },

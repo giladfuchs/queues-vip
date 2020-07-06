@@ -9,8 +9,6 @@ import { falidQueueErrorHandler } from "../../../general/action/index.actions";
 export const setServiceToQueue = (servicesList: ServiceListQueue) => {
   return async (dispatch: any) => {
     try {
-      console.log(servicesList);
-
       dispatch({ type: GeneralActionsEnum.START_QUEUE });
       const res = await API.post(
         localStorage.getItem("domain") + "/calendar/setServiceToQueue",

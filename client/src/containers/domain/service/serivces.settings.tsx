@@ -87,7 +87,7 @@ const SerivceComp: React.FC<Props> = (props) => {
             setError(language.chooseMinOneService[1])
 
     };
-    const [redirect, setRedirect] = useState<any>(null);
+    const [redirect, setRedirect] = useState<JSX.Element>();
 
     useEffect(() => {
         error != null && error === '' && setRedirect(

@@ -54,8 +54,6 @@ const DomainRegister: React.FC<Props> = (props) => {
         },
         phone,
     });
-    console.log(form);
-    console.log(typeof form);
 
     const [error, setError] = useState<string>("");
 
@@ -67,19 +65,15 @@ const DomainRegister: React.FC<Props> = (props) => {
             ...Object.keys(form).map((k: string) => ({ [k]: form[k].value }))
         );
 
-
-
-
         props.registerDomainClient(client, domain);
     };
-    const [redirect, setRedirect] = useState<any>(null);
+    const [redirect, setRedirect] = useState<JSX.Element>();
     useEffect(() => {
         // console.log( props.history.push());
         const url = props.match.params.domain;
         props.isLogin && setRedirect(
             <Redirect to={'/' + url} />)
     }, [props.isSetToken]);
-
 
     return (
         <div className={classes.Register}>

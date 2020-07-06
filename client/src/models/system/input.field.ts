@@ -2,9 +2,9 @@ export type InputField = {
   elementType: string;
   elementConfig: {
     type: string;
-    placeholder: string;
+    placeholder?: string;
   };
-  value: string;
+  value: string | number;
   label: string;
   name: string;
   validation: any;

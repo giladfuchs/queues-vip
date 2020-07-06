@@ -43,7 +43,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
   return (
     <div className={classes.Register}>
       <div
-        className={classes.Form2 + " " + classes.Form}
+        className={[classes.Form2, classes.Form].join('')}
       >
         <AuthenticationHeadrer
           title={language.restPasswordTitle[1]}

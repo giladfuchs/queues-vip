@@ -9,6 +9,7 @@ import AuthenticationHeadrer from "../../../../shared/header/form-header";
 import { plainText, phone, email, password } from "../../../../../models/ui/input/utility/input-types.input";
 import Inputs from "../../../../../models/ui/input/inputs";
 import { decrement, incrementent } from "../../../../../store/business/general/action/index.actions";
+import { Form } from "../../../../../models/system/input.field";
 
 
 
@@ -31,7 +32,7 @@ const ManagerRegistration: React.FC<Props> = (props) => {
 
     const [error, setError] = useState<string>();
 
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         firstName: {
             ...plainText, elementConfig: {
                 type: "text",
@@ -72,17 +73,12 @@ const ManagerRegistration: React.FC<Props> = (props) => {
         }
     });
 
-
-
     const onClickNext = () => {
 
-        let ansForm = Object.assign({},
-            ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
+        const ansForm = Object.assign({},
+            ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
         );
-
-
         props.registerFirstEmployee(ansForm);
-
     };
 
 
@@ -99,7 +95,7 @@ const ManagerRegistration: React.FC<Props> = (props) => {
                     <div className={ManagerRegistrationStyle.Body}>
 
                         <Inputs
-                            form={Form} setForm={setForm} error={error} setError={setError}
+                            form={form} setForm={setForm} error={error} setError={setError}
 
                         />
                         {!props.loading ?

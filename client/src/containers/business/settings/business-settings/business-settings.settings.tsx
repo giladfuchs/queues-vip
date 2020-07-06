@@ -16,6 +16,7 @@ import { postBusinessDetails } from "../../../../store/business/data/action/admi
 import { getError, getLoading } from "../../../../store/business/general/general.selectors";
 import { BusinessDetails } from '../../../../models/system/business-details';
 import { getBusiness } from '../../../../store/business/data/data.selectors';
+import { Form } from '../../../../models/system/input.field';
 
 interface StateProps {
     business: any
@@ -32,19 +33,19 @@ const BusinessSettings: React.FC<Props> = (props) => {
 
     useEffect(() => {
         if (props.business) {
-            setForm(Object.assign({}, ...Object.keys(Form).map((k) => {
-                return ({ [k]: { ...Form[k], value: props.business.details[k] || props.business.otherData[k] } })
+            setForm(Object.assign({}, ...Object.keys(form).map((k) => {
+                return ({ [k]: { ...form[k], value: props.business.details[k] || props.business.otherData[k] } })
             })))
             // setLinks(props.business.otherData.links)
         }
     }, []);
-    const [Links, setLinks] = useState<any>({
+    const [Links, setLinks] = useState({
         "facebook": "",
         "instagram": ""
     })
     const [Edit, setEdit] = useState<boolean>(false)
 
-    const [Form, setForm] = useState<any>({
+    const [form, setForm] = useState<Form>({
         name: {
             ...plainText, elementConfig: {
                 type: "text",
@@ -72,7 +73,6 @@ const BusinessSettings: React.FC<Props> = (props) => {
             ...email
             , editable: false,
         },
-
         logo: {
             ...plainText, label: "לוגו"
         },
@@ -87,21 +87,18 @@ const BusinessSettings: React.FC<Props> = (props) => {
     });
     const [error, setError] = useState<string>("");
 
-    const [header, setHeader] = useState<any>(null);
-    useEffect(() => {
-        setHeader(settingHeader())
-    }, []);
     const settingHeader = useCallback(() => (<div>
         <SettingsHeader title={language.businessSettingHeaderTitle[1]} subTitle={language.businessSettingHeaderSubTitle[1]} />
         <Breadcrumbs title={language.businessSettingHeaderTitle[1]} />
     </div>
     ), []);
+    const [header] = useState(settingHeader());
 
     const updateDetails = () => {
         const ansForm = Object.assign(
             { Links },
-            ...Object.keys(Form).map((k) => {
-                return ({ [k]: Form[k].value })
+            ...Object.keys(form).map((k) => {
+                return ({ [k]: form[k].value })
             }))
         const businessDetails: BusinessDetails = {
             details: {
@@ -122,16 +119,15 @@ const BusinessSettings: React.FC<Props> = (props) => {
     }
     const edit = () => {
         setEdit(true)
-        setForm(Object.assign({}, ...Object.keys(Form).map((k) => {
-            return ({ [k]: { ...Form[k], editable: true } })
+        setForm(Object.assign({}, ...Object.keys(form).map((k) => {
+            return ({ [k]: { ...form[k], editable: true } })
         })))
     }
     const cancel = () => {
         setEdit(false)
-        console.log(Form, props.business);
 
-        setForm(Object.assign({}, ...Object.keys(Form).map((k) => {
-            return ({ [k]: { ...Form[k], value: props.business.details[k] || props.business.otherData[k], editable: false } })
+        setForm(Object.assign({}, ...Object.keys(form).map((k) => {
+            return ({ [k]: { ...form[k], value: props.business.details[k] || props.business.otherData[k], editable: false } })
         })))
         // setLinks(props.details.links)
 
@@ -145,11 +141,10 @@ const BusinessSettings: React.FC<Props> = (props) => {
                 {header}
                 {showError && <p className={BusinessSettingsStyle.Error}>{showError}</p>}
 
-
                 <div className={BusinessSettingsStyle.Body}>
                     <div className={BusinessSettingsStyle.Details}>
                         <Inputs
-                            form={Form} setForm={setForm} error={error} setError={setError}
+                            form={form} setForm={setForm} error={error} setError={setError}
                         />
                         <SocialMediaLinks onChange={() => { }} Links={Links} iconColor="#7467ef" style={{ width: '300px' }} />
                     </div>
