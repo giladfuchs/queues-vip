@@ -3,7 +3,7 @@ import { Redirect, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 
 import classes from './business-login.module.scss'
-import { Button, Inputs, AuthenticationHeadrer } from "../../../../models/ui";
+import { Button, Inputs, AuthenticationHeadrer, Loading } from "../../../../models/ui";
 
 import { phone, plainText, Client, Form } from "../../../../models";
 import * as language from "../../../../assets/index";
@@ -68,7 +68,7 @@ const DomainRegister: React.FC<Props> = (props) => {
         const url = props.match.params.domain;
         props.isLogin && setRedirect(
             <Redirect to={'/' + url} />)
-    }, [props.isSetToken]);
+    }, [props]);
 
     return (
         <div className={classes.Register}>
@@ -84,6 +84,7 @@ const DomainRegister: React.FC<Props> = (props) => {
 
                 <React.Fragment>
                     <div className={classes.Body}>
+
                         <Inputs
                             form={form} setForm={setForm} error={error} setError={setError}
                         />
@@ -97,7 +98,7 @@ const DomainRegister: React.FC<Props> = (props) => {
                             </div>
                         </React.Fragment>
                     ) : (
-                            <div>Loading...</div>
+                            <Loading />
                         )}
                 </React.Fragment>
             </div> :

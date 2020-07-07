@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 
 import classes from "../business-login.module.scss";
 
-import { AuthenticationHeadrer, Inputs, Button } from "../../../../../models/ui";
+import { AuthenticationHeadrer, Inputs, Button, Loading } from "../../../../../models/ui";
 
 import { getLoading, getError } from "../../../../../store/selectors";
 import { resetPasswordEmployee } from "../../../../../store";
 
 import * as language from "../../../../../assets/language/language";
 import { phone } from "../../../../../models/ui/input/utility/input-types.input";
+import { Form } from "../../../../../models";
 
 interface StateProps {
   loading: boolean;
@@ -22,7 +23,7 @@ interface DispatchProps {
 
 type Props = DispatchProps & StateProps;
 const ResetEmployeePassword: React.FC<Props> = (props) => {
-  const [Form, setForm] = useState<any>({
+  const [Form, setForm] = useState<Form>({
     phone
   });
   const [error, setError] = useState<string>("");
@@ -32,7 +33,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
     if (error || props.error) return;
 
 
-    let ansForm = Object.assign(
+    const ansForm = Object.assign(
       {},
       ...Object.keys(Form).map((k) => ({ [k]: Form[k].value }))
     );
@@ -53,7 +54,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
           error={error ? error : props.error}
         />
 
-        {props.loading && <div>Loading...</div>}
+        {props.loading && <Loading />}
 
         {!props.loading && (
           <React.Fragment>

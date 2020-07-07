@@ -3,11 +3,11 @@ import { RouteComponentProps, Redirect } from "react-router";
 import { connect } from "react-redux";
 
 import { getLoading, getError, getisLogin } from "../../../../../store/selectors";
-import { setNewPasswordEmployee } from "../../../../../store/business/auth";
+import { setNewPasswordEmployee } from "../../../../../store/auth";
 
 import classes from "../business-login.module.scss";
 
-import { Button, AuthenticationHeadrer, Inputs } from "../../../../../models/ui";
+import { Button, AuthenticationHeadrer, Inputs, Loading } from "../../../../../models/ui";
 import * as language from "../../../../../assets";
 
 
@@ -40,7 +40,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
   const [error, setError] = useState<string>("");
   const onClickNext = () => {
     const token = props.match.params.token;
-    let ansForm = Object.assign(
+    const ansForm = Object.assign(
       {},
       ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
     );
@@ -63,7 +63,7 @@ const ResetEmployeePassword: React.FC<Props> = (props) => {
             error={error ? error : props.error}
           />
 
-          {props.loading && <div>Loading...</div>}
+          {props.loading && <Loading />}
 
           {!props.loading && (
             <React.Fragment>

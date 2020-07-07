@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as language from "../../../../../assets/language/language";
 import ManagerRegistrationStyle from "./employee-registration.module.scss";
-import { Button, AuthenticationHeadrer, Inputs } from "../../../../../models/ui";
-import { registerFirstEmployee } from "../../../../../store/business/auth/action/employee.auth.actions";
+import { Button, AuthenticationHeadrer, Inputs, Loading } from "../../../../../models/ui";
+import { registerFirstEmployee } from "../../../../../store/auth/action/employee.auth.actions";
 import { getLoading, getError } from "../../../../../store/selectors";
 import { plainText, phone, email, password } from "../../../../../models/ui/input/utility/input-types.input";
-import { decrement, incrementent } from "../../../../../store/business/general/action/index.actions";
+import { decrement, incrementent } from "../../../../../store/general/action/index.actions";
 import { Form } from "../../../../../models/system/input.field";
 
 
@@ -106,7 +106,7 @@ const ManagerRegistration: React.FC<Props> = (props) => {
                                 </Button>
                             </div>
                             :
-                            <div>Loading...</div>
+                            <Loading />
                         }
 
                     </div>

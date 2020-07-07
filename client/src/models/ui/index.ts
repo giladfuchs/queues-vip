@@ -8,3 +8,4 @@ export * from "./modal/modal";
 export * from "./options/options";
 export * from "./switch-button/switch-button";
 export * from "./header";
+export * from "./loading/loading";

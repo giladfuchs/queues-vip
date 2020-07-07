@@ -42,7 +42,7 @@ const SerivceComp: React.FC<Props> = (props) => {
                 <th>{language.commands[1]}</th>
             </tr>
         </thead>
-    ), []);
+    ), [props.isAdmin]);
     const [header] = useState<JSX.Element>(settingHeader());
 
 

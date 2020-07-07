@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { authReducer } from "./business/auth/reducer/index.auth.reducer";
-import { dataReducer } from "./business/data/reducer/index.data.reducer";
-import { generalReducer } from "./business/general/reducer/index.reducer";
+import { authReducer } from "./auth/reducer/index.auth.reducer";
+import { dataReducer } from "./data/reducer/index.data.reducer";
+import { generalReducer } from "./general/reducer/index.reducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -17,6 +17,6 @@ export const errorApi = (error: {
     ? error.response.data.message
     : error.message;
 
-export * from "./business/auth/index";
-export * from "./business/data/index";
-export * from "./business/general/index";
+export * from "./auth/index";
+export * from "./data/index";
+export * from "./general/index";

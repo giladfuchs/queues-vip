@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import Input from './input';
 
@@ -38,9 +38,6 @@ export const Inputs: React.FC<StateProps> = (props) => {
         return { updatedForm, formIsValid };
     };
 
-
-
-
     const inputChangedHandler = (e: React.ChangeEvent<HTMLInputElement>, inputIdentifier: string) => {
 
         const ans = inputChanged(props.form, e, inputIdentifier);
@@ -58,7 +55,9 @@ export const Inputs: React.FC<StateProps> = (props) => {
             }
         }, 700))
     }
-    const formElementsArrayfunc = () => Object.keys(props.form).map((key) => {
+
+
+    const formElementsArrayfunc = useCallback(() => (Object.keys(props.form).map((key) => {
         return {
             _id: key,
             config: props.form[key],
@@ -78,12 +77,14 @@ export const Inputs: React.FC<StateProps> = (props) => {
             class={formElement.config.class}
 
         />
-    ));
+    ))
+    ), [props.form]);
+
 
     const [formElementsArray, setformElementsArray] = useState<JSX.Element[]>(formElementsArrayfunc());
     useMemo(() => {
         setformElementsArray(formElementsArrayfunc())
-    }, [props.form,]);
+    }, [formElementsArrayfunc]);
 
     return (
         <div>

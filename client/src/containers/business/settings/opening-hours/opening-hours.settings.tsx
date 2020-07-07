@@ -4,14 +4,15 @@ import HoursStyle from './opening-hours.module.scss';
 import * as days from '../../../../assets';
 import { Day } from '../../../../models/system/day';
 import { ArrowNext } from '../../../../assets';
-import { Button, SwitchButton, SettingsHeader, Options, Breadcrumbs } from '../../../../models/ui';
+import { Button, SwitchButton, SettingsHeader, Options, Breadcrumbs, Loading } from '../../../../models/ui';
 import { postEmployeeSchedule } from "../../../../store"
-import { getSchedule, getError } from "../../../../store/selectors";
+import { getSchedule, getError, getLoading } from "../../../../store/selectors";
 import * as language from '../../../../assets/language/language';
 
 interface StateProps {
     error: string
-    schedule: any
+    schedule: any;
+    loading: boolean
 }
 
 interface DispatchProps {
@@ -21,7 +22,6 @@ type Props = DispatchProps & StateProps;
 
 
 const OpeningHours: React.FC<Props> = (props) => {
-    const [Flag, setFlag] = useState<boolean>(false);
     const [Hours, setHours] = useState<Day>({
         "0": [],
         "1": [],
@@ -33,7 +33,6 @@ const OpeningHours: React.FC<Props> = (props) => {
     })
     useEffect(() => {
         props.schedule && setHours({ ...Hours, ...props.schedule })
-        setFlag(true)
         setHeader()
     }, []);
     const setHeader = useCallback(() =>
@@ -83,10 +82,10 @@ const OpeningHours: React.FC<Props> = (props) => {
 
 
     const showError = props.error !== "" && props.error !== null ? props.error : null;
-    const [render, setRender] = useState<JSX.Element>(<p>loading...</p>)
+    const [render, setRender] = useState<JSX.Element>(<Loading />)
     useEffect(() => {
 
-        setRender(Flag ? <React.Fragment>
+        setRender(<React.Fragment>
 
             {days.FullHebDays.map((d: string, i: number) => {
 
@@ -106,7 +105,7 @@ const OpeningHours: React.FC<Props> = (props) => {
                     </div>
                 )
             })}
-        </React.Fragment> : <p>loading...</p>)
+        </React.Fragment>)
 
     }, [Hours]);
 
@@ -118,7 +117,7 @@ const OpeningHours: React.FC<Props> = (props) => {
                 {anotherHeader}
                 <hr />
                 <div className={HoursStyle.DaysContent}>
-                    {render}
+                    {!props.loading ? render : <Loading />}
                 </div>
             </div>
 
@@ -134,12 +133,12 @@ const OpeningHours: React.FC<Props> = (props) => {
 const mapStateToProps = (state: any) => ({
     schedule: getSchedule(state),
     error: getError(state),
+    loading: getLoading(state)
 
 });
 
 
 const mapDispatchToProps = (dispatch: any) => ({
-    // getDetails: () => dispatch(getDetails()),
     postEmployeeHours: (form: Day) => dispatch(postEmployeeSchedule(form)),
 });
 

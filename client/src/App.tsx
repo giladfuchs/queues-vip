@@ -1,13 +1,14 @@
 import React, { useEffect, Suspense, useState } from 'react';
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import ReactLoading from 'react-loading';
 
 
 
 import { History } from 'history';
 import Layout from './models/ui/Layout/layout';
 import { getIsValidDomain, getisLogin, getIsAdmin, getIsTokenSet } from './store/selectors';
-import { LoginCheck } from './store/business/general/index';
+import { LoginCheck } from './store/general/index';
 
 const DomainLoginClient = React.lazy(() => {
   return import("./containers/domain/auth/domain-login/client-login.domain");
@@ -90,7 +91,7 @@ const App: React.FC<Props> = (props) => {
     signInCheck();
 
 
-  }, [isTokenSet]);
+  }, [isTokenSet, signInCheck]);
 
   useEffect(() => {
 
@@ -123,7 +124,8 @@ const App: React.FC<Props> = (props) => {
   return (
     <div>
       <Layout isLogin={isLogin} isAdmin={isAdmin} isValidDomain={isValidDomain}  >
-        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+        <Suspense fallback={<ReactLoading type="bars" color="#7467ef" height={100} width={100} />
+        }>{routes}</Suspense>
       </Layout>
     </div>
   );
@@ -144,5 +146,3 @@ export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchTo
 
 
 
-// const Routing: React.FC<RouteComponentProps<{}>> = (props) => {
-//   const domain = routerProps.match.params.domain;

@@ -6,7 +6,7 @@ import { Button, AuthenticationHeadrer, Inputs } from '../../../../../models/ui'
 import { getLoading, getError, getDomains } from '../../../../../store/selectors';
 import { getAllDomains } from '../../../../../store';
 import { domain } from '../../../../../models/ui/input/utility/input-types.input';
-import { incrementent } from '../../../../../store/business/general/action/index.actions';
+import { incrementent } from '../../../../../store/general/action/index.actions';
 import { Form } from '../../../../../models/system/input.field';
 
 

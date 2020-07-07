@@ -7,11 +7,10 @@ import classes from './business-login.module.scss'
 import { getLoading, getError, getisLogin } from "../../../../store/selectors";
 import { loginEmployee } from "../../../../store";
 
-import { Button, AuthenticationHeadrer, Inputs } from "../../../../models/ui";
+import { Button, AuthenticationHeadrer, Inputs, Loading } from "../../../../models/ui";
 import * as language from "../../../../assets/language/language";
 
 import { password, phone, Form } from "../../../../models";
-
 
 interface FormState {
     phone: string;
@@ -38,20 +37,18 @@ const BusinessLogin: React.FC<Props> = (props) => {
     const [error, setError] = useState<string>("");
 
     const onClickNext = () => {
-        let ansForm = Object.assign(
+        const ansForm = Object.assign(
             {},
             ...Object.keys(form).map((k) => ({ [k]: form[k].value }))
         );
         props.loginEmployee(ansForm);
     };
-    const [redirect, setRedirect] = useState<any>(null);
+    const [redirect, setRedirect] = useState<JSX.Element>();
     useEffect(() => {
-        if (props.isLogin) {
-            setRedirect(
-                <Redirect to="" />)
-        }
-    }, [props.isLogin]);
+        props.isLogin &&
+            setRedirect(<Redirect to="" />)
 
+    }, [props.isLogin]);
 
     return (
         <div className={classes.Register}>
@@ -78,7 +75,7 @@ const BusinessLogin: React.FC<Props> = (props) => {
                             </div>
                         </React.Fragment>
                     ) : (
-                            <div>Loading...</div>
+                            <Loading />
                         )}
                 </React.Fragment>
             </div>

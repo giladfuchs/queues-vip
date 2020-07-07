@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 
 
 import classes from './business-login.module.scss'
-import { Button, AuthenticationHeadrer, Inputs } from "../../../../models/ui";
+import { Button, AuthenticationHeadrer, Inputs, Loading } from "../../../../models/ui";
 
 import * as language from "../../../../assets/index";
 
 import { phone, Form } from "../../../../models";
 
 import { getLoading, getError, getisLogin, getIsValidDomain } from "../../../../store/selectors";
-import { loginDomainClient, checkDomainIsValid } from "../../../../store/business/auth/index";
+import { loginDomainClient, checkDomainIsValid } from "../../../../store/auth/index";
 
 interface MatchParams {
     domain: string;
@@ -83,7 +83,7 @@ const DomainLogin: React.FC<Props> = (props) => {
                         <div className={classes.Button}>
                             <Button color="purple-register" onClick={() => onClickNext()} disabled={error === ""}>התחבר</Button>
                         </div>
-                    </React.Fragment> : props.isValidDomain && <div>Loading...</div>}
+                    </React.Fragment> : props.isValidDomain && <Loading />}
                 </React.Fragment>
             </div> :
 

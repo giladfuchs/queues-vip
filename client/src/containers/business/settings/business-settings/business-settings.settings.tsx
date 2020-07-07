@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
 import { connect } from "react-redux";
 
 import BusinessSettingsStyle from './business-settings.module.scss';
 import { postBusinessDetails } from "../../../../store"
-import { getBusiness, getError } from '../../../../store/selectors';
+import { getBusiness, getError, getLoading } from '../../../../store/selectors';
 
 import SocialMediaLinks from './social-media-links/social-media-links';
 import { postingImg } from '../../../../assets/images/export-images'
-import { Button, SettingsHeader, Inputs, Breadcrumbs } from '../../../../models/ui';
+import { Button, SettingsHeader, Inputs, Breadcrumbs, Loading } from '../../../../models/ui';
 import { ArrowNext } from '../../../../assets'
 import { plainText, phone, email, Form, BusinessDetails } from '../../../../models';
 import * as language from '../../../../assets/language/language';
@@ -18,7 +19,7 @@ import * as language from '../../../../assets/language/language';
 interface StateProps {
     business: any
     error: string
-
+    loading: boolean
 }
 
 interface DispatchProps {
@@ -150,12 +151,16 @@ const BusinessSettings: React.FC<Props> = (props) => {
                         <img src={postingImg} alt="" />
                     </div>
                 </div>
-                <div className={BusinessSettingsStyle.Button}>{
 
-                    Edit ? <div>     <Button onClick={() => cancel()} color="purple" disabled={true}>ביטול <ArrowNext /></Button>
-                        <Button onClick={() => updateDetails()} color="purple" disabled={true}>שמירה שינויים <ArrowNext /></Button>
-                    </div> : <Button onClick={() => edit()} color="purple" disabled={true}>עריכה <ArrowNext /></Button>
-                }  </div>
+                {props.loading ?
+                    <Loading />
+                    :
+
+                    <div className={BusinessSettingsStyle.Button}>
+                        {Edit ? <div>     <Button onClick={() => cancel()} color="purple" disabled={true}>ביטול <ArrowNext /></Button>
+                            <Button onClick={() => updateDetails()} color="purple" disabled={true}>שמירה שינויים <ArrowNext /></Button>
+                        </div> : <Button onClick={() => edit()} color="purple" disabled={true}>עריכה <ArrowNext /></Button>
+                        }  </div>}
 
             </div>
         </React.Fragment>
@@ -166,7 +171,7 @@ const BusinessSettings: React.FC<Props> = (props) => {
 const mapStateToProps = (state: any) => ({
     business: getBusiness(state),
     error: getError(state),
-
+    loading: getLoading(state)
 });
 
 
