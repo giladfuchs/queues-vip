@@ -1,5 +1,4 @@
 const { errorDomain401 } = require('../utils/error/dbErrorHandler')
-const moment = require('moment')
 module.exports = (app, mongoose) => {
   app.use(async (req, res, next) => {
     try {
@@ -9,7 +8,7 @@ module.exports = (app, mongoose) => {
       req.domains = domains.map(d => d._id)
       if (req.get("domain")) {
         req.mongo = mongoose.connection.useDb(req.get("domain"));
-        connect(req.mongo)
+        // connect(req.mongo)
       }
 
 
@@ -27,10 +26,12 @@ module.exports = (app, mongoose) => {
     try {
       const domain = req.params.domain;
 
+
+
       errorDomain401(req.domains, domain)
 
       req.mongo = mongoose.connection.useDb(domain);
-      connect(req.mongo)
+      // connect(req.mongo)
 
       next();
     } catch (error) {

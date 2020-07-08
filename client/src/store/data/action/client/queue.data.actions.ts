@@ -2,10 +2,21 @@ import { Queue, API, ServiceListQueue } from "../../../../models";
 import { dataActionsEnum } from "../..";
 
 import { GeneralActionsEnum, falidQueueErrorHandler } from "../../../general";
+import openSocket from "socket.io-client";
+import { baseURL } from "../../../../App";
 
 export const setServiceToQueue = (servicesList: ServiceListQueue) => {
   return async (dispatch: any) => {
     try {
+      const socket = openSocket(baseURL);
+      socket.on("queue", (data: any) => {
+        if (data.action === localStorage.getItem("domain")) {
+          dispatch({
+            type: dataActionsEnum.UPDATE_MATRIX,
+            queue: data.queue,
+          });
+        }
+      });
       dispatch({ type: GeneralActionsEnum.START_QUEUE });
       const res = await API.post(
         localStorage.getItem("domain") + "/calendar/setServiceToQueue",
@@ -36,7 +47,7 @@ export const setServiceToQueue = (servicesList: ServiceListQueue) => {
   };
 };
 
-export const updateScheduleWeek = (queue: Queue) => {
+export const updateScheduleWeek = (queue: Queue, stripe: any) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_QUEUE });
@@ -44,13 +55,18 @@ export const updateScheduleWeek = (queue: Queue) => {
         localStorage.getItem("domain") + "/calendar",
         queue
       );
+
       dispatch({
         type: dataActionsEnum.UPDATE_MATRIX,
-        queue,
+        queue: res.data.queue,
       });
-      return dispatch({
+      dispatch({
         type: GeneralActionsEnum.SUCCESS_QUEUE,
       });
+      const result = stripe.redirectToCheckout({
+        sessionId: res.data.session.id,
+      });
+      return;
     } catch (error) {
       falidQueueErrorHandler(dispatch, error);
     }

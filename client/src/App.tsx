@@ -3,12 +3,13 @@ import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom
 import { connect } from "react-redux";
 import ReactLoading from 'react-loading';
 
-
-
 import { History } from 'history';
 import Layout from './models/ui/Layout/layout';
 import { getIsValidDomain, getisLogin, getIsAdmin, getIsTokenSet } from './store/selectors';
 import { LoginCheck } from './store/general/index';
+
+export const baseURL = "http://localhost:8080/";
+// export const baseURL= "https://queue-jz36q4rkyq-uc.a.run.app";
 
 const DomainLoginClient = React.lazy(() => {
   return import("./containers/domain/auth/domain-login/client-login.domain");

@@ -14,7 +14,7 @@ export const getWeekDaysByWeekNumber = (weeknumber?: number, sch?: any) => {
   var date = moment()
       .isoWeek(weeknumber || 1)
       .startOf("week"),
-    days = [];
+    days: string[] = [];
   date.add(week[0], "day");
 
   let add = 0;

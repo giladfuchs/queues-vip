@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
+import scriptLoader from 'react-async-script-loader';
+
 import moment from 'moment';
 
 import CalendarStyle from './calendar.module.scss';
@@ -24,13 +26,19 @@ interface StateProps {
     timeDistance: number,
     durationOfNewQueue: number,
     price: number,
-}
 
+
+
+}
+interface OwnProps {
+    isScriptLoaded: boolean;
+    isScriptLoadSucceed: boolean
+}
 interface DispatchProps {
     updateScheduleWeek: typeof updateScheduleWeek;
 }
 
-type Props = DispatchProps & StateProps;
+type Props = DispatchProps & StateProps & OwnProps;
 const CalendarUser: React.FC<Props> = (props) => {
     const [headerDays, setHeaderDays] = useState<JSX.Element[]>();
 
@@ -45,8 +53,15 @@ const CalendarUser: React.FC<Props> = (props) => {
     const [OpenModal, setOpenModal] = useState<boolean>(false)
     const [Time, setTime] = useState<{ date: string, hour: string }>({ date: "", hour: "" });
 
+    const [stripe, setStripe] = React.useState(null);
 
+    useEffect(() => {
+        console.log(props.isScriptLoaded, props.isScriptLoadSucceed);
 
+        if (props.isScriptLoaded && props.isScriptLoadSucceed) {
+            setStripe(window.Stripe('pk_test_0vhbUGgLB4Lt9JojLBgMvJIv00uaF8SW90'));
+        }
+    }, [props.isScriptLoaded, props.isScriptLoadSucceed]);
 
 
 
@@ -97,7 +112,7 @@ const CalendarUser: React.FC<Props> = (props) => {
             hour: Time.hour,
             duration: props.durationOfNewQueue
         }
-        props.updateScheduleWeek(event)
+        props.updateScheduleWeek(event, stripe)
     }
 
     const onSlotClick = (hour: string, date: string) => {
@@ -167,7 +182,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    updateScheduleWeek: (queue: Queue) => dispatch(updateScheduleWeek(queue)),
+    updateScheduleWeek: (queue: Queue, stripe: any) => dispatch(updateScheduleWeek(queue, stripe)),
 });
 
-export default connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(CalendarUser);
+export default scriptLoader('https://js.stripe.com/v3/')(connect<StateProps, DispatchProps>(mapStateToProps, mapDispatchToProps)(CalendarUser));

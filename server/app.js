@@ -26,46 +26,18 @@ mongoose
   })
   .then(() => {
     console.log("DB Connected");
-    app.listen(8080);
-    require("./routes/index.route")(app, mongoose);
+
+    if (app._eventsCount > -1) {
+      const server = app.listen(8080)
+      // require('./controller/queue/socket').init(server)
+    }
+    require("./routes/index.route")(app, mongoose)
+
   });
 
-// https://www.vtexperts.com/wp-content/uploads/2017/05/icon-demo1.png
+
+
 app.post("/", async (req, res, next) => {
-  // , 'manager'
-  const dbToNoRemove = ['local', 'admin', 'config', 'sushi', "A"];
-  try {
-
-
-    const databases = await mongoose.connections[0].db
-      .admin()
-      .listDatabases({ listDatabases: 1, nameOnly: true });
-    databases.databases.forEach(dbName => {
-      if (dbToNoRemove.indexOf(dbName.name) < 0)
-
-        mongoose
-          .connect(process.env.MONGO_URI + dbName.name, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
-          })
-          .then(() => {
-            return mongoose.connection.db.dropDatabase();
-
-          });
-    })
-    res.status(205).json({ message: "delete", databases: databases.databases });
-  } catch (error) {
-
-    res.status(400).json({ message: "admin error" });
-
-  }
-});
-
-
-
-app.post("/a", async (req, res, next) => {
   // , 'manager'
   const dbToNoRemove = ['local', 'admin', 'config', 'sushi', 'manager', 'gilad', 'demo'];
   try {

@@ -66,9 +66,11 @@ const DomainRegister: React.FC<Props> = (props) => {
     useEffect(() => {
         // console.log( props.history.push());
         const url = props.match.params.domain;
-        props.isLogin && setRedirect(
+        console.log(url);
+
+        props.isSetToken && setRedirect(
             <Redirect to={'/' + url} />)
-    }, [props]);
+    }, [props.isSetToken]);
 
     return (
         <div className={classes.Register}>

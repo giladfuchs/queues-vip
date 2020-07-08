@@ -2,7 +2,6 @@ import React from 'react';
 import SerivcesSettingsStyle from '../domain/service/services.module.scss';
 
 
-
 const Home: React.FC = () => {
 
     return (

@@ -54,24 +54,48 @@ exports.setServiceToQueue = async (req, res, next) => {
 
 
 
-
+const Stripe = require('stripe');
 
 exports.postQueue = async (req, res, next) => {
   try {
     // error422(req);
+    // error403Admin(req);
 
     const Queue = require("../../models/queue.model")(req.mongo);
 
-    // error403Admin(req);
-    console.log(req.body);
 
 
     const queue = new Queue({ ...req.body });
     await queue.save();
 
+    const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
+    const urlStripe = "https://queues-vip.web.app/";
+    const lineItem = {
+      name: req.client.name,
+      amount: 33,
+      currency: "ILS",
+      quantity: 1,
+
+    };
+    const session = await stripe.checkout.sessions.create({
+      client_reference_id: "clientReferenceId",
+      customer_email: req.client.phone,
+      payment_method_types: ['card'],
+      line_items: [lineItem],
+      payment_intent_data: {
+        description: req.client._id.toString(),
+
+      },
+      success_url: urlStripe,
+      cancel_url: urlStripe,
+    });
+
+    const io = require('./socket')
+    io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
     res.status(201).json({
       msg: "create new queue",
       queue,
+      session
     });
   } catch (err) {
     console.log(err);
