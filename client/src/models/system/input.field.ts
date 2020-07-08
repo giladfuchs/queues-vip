@@ -1,7 +1,8 @@
 export type InputField = {
   elementType: string;
+  type: string;
   elementConfig: {
-    type: string;
+    id: string;
     placeholder?: string;
   };
   value: string | number;

@@ -13,7 +13,7 @@ const SingletonBusinessSchema = (() => {
       {
         details: {
           type: {
-            name: {
+            organization: {
               type: String,
               trim: true,
               required: true,
@@ -31,11 +31,7 @@ const SingletonBusinessSchema = (() => {
               required: true,
               maxlength: 11,
             },
-            email: {
-              type: String,
-              trim: true,
-              required: true,
-            },
+
           },
           required: true
         },

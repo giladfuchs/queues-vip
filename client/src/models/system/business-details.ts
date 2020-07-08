@@ -1,9 +1,8 @@
 export type BusinessDetails = {
   details: {
-    name: string;
+    organization: string;
     address: string;
     phone: string;
-    email: string;
   };
 
   otherData: {

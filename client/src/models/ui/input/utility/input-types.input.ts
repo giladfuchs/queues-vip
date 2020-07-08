@@ -3,10 +3,12 @@ import { InputField } from "../../../system/input.field";
 
 export const password: InputField = {
   elementType: "input",
+  type: "password",
   elementConfig: {
-    type: "password",
+    id: "new-password",
     placeholder: language.password[1],
   },
+
   value: "",
   label: language.password[1],
   name: language.password[1],
@@ -23,8 +25,9 @@ export const password: InputField = {
 
 export const phone: InputField = {
   elementType: "input",
+  type: "text",
   elementConfig: {
-    type: "tel",
+    id: "tel-local",
     placeholder: language.phone[1],
   },
   value: "",
@@ -43,8 +46,9 @@ export const phone: InputField = {
 
 export const plainText: InputField = {
   elementType: "input",
+  type: "text",
   elementConfig: {
-    type: "text",
+    id: "text",
     placeholder: language.firstName[1],
   },
   value: "",
@@ -63,8 +67,9 @@ export const plainText: InputField = {
 
 export const domain: InputField = {
   elementType: "input",
+  type: "text",
   elementConfig: {
-    type: "text",
+    id: "text",
     placeholder: language.domainTitle[1],
   },
   value: "",
@@ -84,8 +89,9 @@ export const domain: InputField = {
 
 export const email: InputField = {
   elementType: "input",
+  type: "text",
   elementConfig: {
-    type: "email",
+    id: "email",
     placeholder: language.email[1],
   },
   value: "",

@@ -35,14 +35,14 @@ const DomainRegister: React.FC<Props> = (props) => {
     const [form, setForm] = useState<Form>({
         firstName: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "first",
                 placeholder: language.firstName[1],
             },
             label: language.firstName[1],
         },
         lastName: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "last",
                 placeholder: language.lastName[1],
             },
             label: language.lastName[1],

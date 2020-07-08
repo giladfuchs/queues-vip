@@ -120,6 +120,7 @@ exports.register = async (req, res, next) => {
 exports.employeeLogin = async (req, res, next) => {
     try {
         const { phone, password } = req.body;
+
         const domain = await Domain.findOne({ phone: phone });
         error404(domain);
 

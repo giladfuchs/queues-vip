@@ -39,14 +39,14 @@ const DomainLogin: React.FC<Props> = (props) => {
         props.checkDomainIsValid(props.match.params.domain)
     }, []);
     const [form, setForm] = useState<Form>({
-        phone,
+        "tel-local": phone,
     });
 
     const [error, setError] = useState<string>("");
 
     const onClickNext = () => {
         const domain = props.match.params.domain;
-        props.loginDomainClient(domain, "" + form.phone.value);
+        props.loginDomainClient(domain, "" + form["tel-local"].value);
     };
     const [redirect, setRedirect] = useState<JSX.Element>();
 

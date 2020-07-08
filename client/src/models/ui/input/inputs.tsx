@@ -64,6 +64,7 @@ export const Inputs: React.FC<StateProps> = (props) => {
         };
     }).map((formElement: any) => (
         <Input
+            type={formElement.config.type}
             key={formElement._id}
             label={formElement.config.label}
             style={formElement.config.style}
@@ -75,10 +76,9 @@ export const Inputs: React.FC<StateProps> = (props) => {
             touched={formElement.config.touched}
             changed={(e) => inputChangedHandler(e, formElement._id)}
             class={formElement.config.class}
-
-        />
-    ))
-    ), [props.form]);
+            name={formElement._id}
+        />)
+    )), [props.form]);
 
 
     const [formElementsArray, setformElementsArray] = useState<JSX.Element[]>(formElementsArrayfunc());

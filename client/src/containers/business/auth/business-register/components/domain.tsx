@@ -27,6 +27,7 @@ interface DispatchProps {
 
 type Props = DispatchProps & StateProps;
 const Domain: React.FC<Props> = (props) => {
+
     const [form, setForm] = useState<Form>({
         domain: {
             ...domain,
@@ -37,6 +38,8 @@ const Domain: React.FC<Props> = (props) => {
             }
         }
     });
+    console.log(form);
+
     const [error, setError] = useState<string>();
 
     useEffect(() => {

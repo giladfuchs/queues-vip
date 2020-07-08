@@ -14,7 +14,7 @@ interface OwnProps {
     invalid?: boolean;
     touched?: boolean;
     changed?: (e: any) => void;
-    type?: any;
+    type: string;
     style?: {};
     class?: "line" | "border";
     textArea?: boolean;
@@ -23,6 +23,8 @@ const Input: React.FC<OwnProps> = (props) => {
 
     let inputElement = null;
     const scssFile = props.class === "line" ? InputLinetyle.Input : inputStyle.Input;
+    // props.key === 'email' &&
+
 
     switch (props.elementType) {
         case "input":
@@ -34,7 +36,8 @@ const Input: React.FC<OwnProps> = (props) => {
                         placeholder={props.label}
                         value={props.value}
                         onChange={props.changed}
-                        autoComplete="on"
+                        // autoComplete="on"
+                        type={props.type}
                     />
                 );
             break;
@@ -49,24 +52,11 @@ const Input: React.FC<OwnProps> = (props) => {
                     />
                 );
             break;
-        case "text":
-            inputElement =
-                (
-                    <input
-                        className={props.class === "line" ? InputLinetyle.InputItem : inputStyle.InputItem}
-                        {...props.elementConfig}
-                        placeholder={props.label}
-                        value={props.value}
 
-
-                    />
-                );
-            break;
     }
 
     return (
         <div style={props.style} className={scssFile}>
-            {/* {error} */}
             {inputElement}
             <label className={props.class === "line" ? InputLinetyle.Label : inputStyle.Label} htmlFor={props.name}>{props.label}</label>
         </div>

@@ -30,7 +30,6 @@ exports.clientLogin = async (req, res, next) => {
 
         error422(req)
         const Client = require("../../../models/client.model")(req.mongo);
-        console.log(req.body);
 
         const client = await Client.findOne({ "details.phone": req.body.phone })
         error404(client)

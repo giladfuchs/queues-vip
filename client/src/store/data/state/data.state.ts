@@ -3,10 +3,9 @@ import { dataState } from "./data.types";
 export const initialDataState: dataState = {
   business: {
     details: {
-      name: "",
+      organization: "",
       address: "",
       phone: "",
-      email: "",
     },
     otherData: {
       logo: "",

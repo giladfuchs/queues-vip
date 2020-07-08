@@ -47,7 +47,6 @@ const BusinessLogin: React.FC<Props> = (props) => {
     useEffect(() => {
         props.isLogin &&
             setRedirect(<Redirect to="" />)
-
     }, [props.isLogin]);
 
     return (

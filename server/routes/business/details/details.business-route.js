@@ -13,7 +13,7 @@ router.get("/", isAuth("employee"), businessDetailsController.getBuisnessDetails
 
 router.post(
   "/",
-  businessDetailsValidator,
+  // businessDetailsValidator,
   isAuth("employee"),
   businessDetailsController.postBuisnessDetails
 );

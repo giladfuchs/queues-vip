@@ -30,6 +30,8 @@ type Props = DispatchProps & StateProps;
 const BusinessSettings: React.FC<Props> = (props) => {
 
     useEffect(() => {
+        console.log(props.business);
+
         if (props.business) {
             setForm(Object.assign({}, ...Object.keys(form).map((k) => {
                 return ({ [k]: { ...form[k], value: props.business.details[k] || props.business.otherData[k] } })
@@ -44,9 +46,9 @@ const BusinessSettings: React.FC<Props> = (props) => {
     const [Edit, setEdit] = useState<boolean>(false)
 
     const [form, setForm] = useState<Form>({
-        name: {
+        organization: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "organization",
                 placeholder: language.businessName[1],
             },
             editable: false,
@@ -54,7 +56,7 @@ const BusinessSettings: React.FC<Props> = (props) => {
         },
         address: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "street-address",
                 placeholder: language.address[1],
             }, label: language.address[1],
             validation: {
@@ -67,10 +69,7 @@ const BusinessSettings: React.FC<Props> = (props) => {
             ...phone,
             editable: false,
         }
-        , email: {
-            ...email
-            , editable: false,
-        },
+        ,
         logo: {
             ...plainText, label: "לוגו"
         },
@@ -100,10 +99,9 @@ const BusinessSettings: React.FC<Props> = (props) => {
             }))
         const businessDetails: BusinessDetails = {
             details: {
-                name: ansForm.name,
+                organization: ansForm.organization,
                 address: ansForm.address,
                 phone: ansForm.phone,
-                email: ansForm.email,
             },
             otherData: {
                 logo: ansForm.logo,

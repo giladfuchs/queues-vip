@@ -33,40 +33,25 @@ const ManagerRegistration: React.FC<Props> = (props) => {
     const [form, setForm] = useState<Form>({
         firstName: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "first",
                 placeholder: language.firstName[1],
             },
-            value: "om",
             label: language.firstName[1],
         },
         lastName: {
             ...plainText, elementConfig: {
-                type: "text",
+                id: "last",
                 placeholder: language.lastName[1],
             },
-            value: "aaa",
-
             label: language.lastName[1],
         },
-        phone: {
-            ...phone,
-            value: "0544446655",
+        phone,
 
-        }
-        , email: {
-            ...email
-            ,
-            value: "igilfu@gmail.com",
-
-        },
-        password: {
-            ...password,
-            // value: "asds@dd.com",
-
-        },
+        email,
+        password,
         validPassword: {
             ...password, label: language.confirmPassword[1],
-            value: "asds@dd.com",
+            value: "111111",
 
         }
     });

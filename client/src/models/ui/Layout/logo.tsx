@@ -11,7 +11,7 @@ const Logo: React.FC<StateProps> = (props) => {
     const [img, setImg] = useState<string>("https://w7.pngwing.com/pngs/139/151/png-transparent-computer-icons-calendar-agenda-calendar-icon-miscellaneous-blue-text.png")
 
     useEffect(() => {
-        const url: string = props.business.otherData.logo !== undefined ? props.business.otherData.logo : "";
+        const url: string = props.business && props.business.otherData && props.business.otherData.logo !== undefined ? props.business.otherData.logo : "";
         url !== '' && setImg(url)
     }
         , [props.business])

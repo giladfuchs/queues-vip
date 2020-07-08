@@ -27,7 +27,7 @@ const AddService: React.SFC<OwnProps> = (props) => {
             ...plainText, validation: { biggerThenZero: true, minLen: 1 },
             label: language.price[1], value: props.updateService ? props.updateService.price : "",
             elementConfig: {
-                type: "number"
+                id: "number"
             },
             class: "line"
         },
@@ -35,7 +35,7 @@ const AddService: React.SFC<OwnProps> = (props) => {
             ...plainText, validation: { biggerThenZero: true, minLen: 1 }, label: language.duration[1],
             value: props.updateService ? props.updateService.duration : "",
             elementConfig: {
-                type: "number"
+                id: "number"
             }
             , class: "line"
         },
