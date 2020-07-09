@@ -4,6 +4,7 @@ module.exports = (app, mongoose) => {
     try {
       const domains = await require('../models/domain.model').
         aggregate([{ '$match': {} }, { '$group': { _id: '$domain' } }])
+      // console.log(req.rawBody);
 
       req.domains = domains.map(d => d._id)
       if (req.get("domain")) {
@@ -19,7 +20,7 @@ module.exports = (app, mongoose) => {
   });
   app.use('/test', require('./test'))
 
-  app.use("/business", require("./business/index.business-route"));
+  app.use("/admin", require("./business/index.admin-route"));
 
 
   app.use("/:domain", async (req, res, next) => {

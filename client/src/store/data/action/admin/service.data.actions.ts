@@ -7,7 +7,7 @@ export const postService = (service: Service) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_SERVICE });
-      const res = await API.post("business/service", service);
+      const res = await API.post("admin/service", service);
 
       dispatch({
         type: dataActionsEnum.SUCCESS_POST_SERVICE,
@@ -26,7 +26,7 @@ export const updateService = (service: Service) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_SERVICE });
-      await API.put("business/service", service);
+      await API.put("admin/service", service);
 
       dispatch({
         type: dataActionsEnum.SUCCESS_UPDATE_SERVICE,
@@ -45,7 +45,7 @@ export const deleteService = (service: Service) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_SERVICE });
-      await API.delete("business/service", {
+      await API.delete("admin/service", {
         headers: {
           _id: service._id,
         },

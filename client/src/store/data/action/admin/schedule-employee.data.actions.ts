@@ -11,7 +11,7 @@ export const postEmployeeSchedule = (schedule: Day) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_BUSINESS_DETAILS });
-      await API.post("business/details/hours", schedule);
+      await API.post("admin/details/hours", schedule);
 
       dispatch({
         type: dataActionsEnum.SUCCESS_POST_EMPLOYEE_SCHEDULE,

@@ -15,10 +15,10 @@ const navigationItems: React.FC<Props> = (props) => (
 
         {(props.isLogin && props.isAdmin) ?
             <React.Fragment>
-                <NavigationItem link="/business/services">{language.services[1]}</NavigationItem>
-                <NavigationItem link="/business/hours">{language.hours[1]}</NavigationItem>
-                <NavigationItem link="/business/businesssettings">{language.businessSettingNav[1]}</NavigationItem>
-                <NavigationItem link="/business/calander">{language.calendar[1]}</NavigationItem>
+                <NavigationItem link="/admin/services">{language.services[1]}</NavigationItem>
+                <NavigationItem link="/admin/hours">{language.hours[1]}</NavigationItem>
+                <NavigationItem link="/admin/businesssettings">{language.businessSettingNav[1]}</NavigationItem>
+                <NavigationItem link="/admin/calander">{language.calendar[1]}</NavigationItem>
                 <NavigationItem link="/logout">{language.logout[1]}</NavigationItem>
 
             </React.Fragment>
@@ -38,8 +38,8 @@ const navigationItems: React.FC<Props> = (props) => (
                     :
 
                     <React.Fragment>
-                        <NavigationItem link="/business/login">{language.login[1]}</NavigationItem>
-                        <NavigationItem link="/business/register">{language.register[1]}</NavigationItem>
+                        <NavigationItem link="/admin/login">{language.login[1]}</NavigationItem>
+                        <NavigationItem link="/admin/register">{language.register[1]}</NavigationItem>
                     </React.Fragment>
         }
     </ul>

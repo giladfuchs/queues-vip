@@ -17,7 +17,7 @@ export const getAllDomains = () => {
   ) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
-      const res = await API.get("business/auth/check");
+      const res = await API.get("admin/auth/check");
       const domains = res.data.domains;
       dispatch({ type: AuthActionsEnum.SET_DOMAINS, domains });
       dispatch({ type: GeneralActionsEnum.SUCCESS_AUTH });
@@ -32,7 +32,7 @@ export const registerFirstEmployee = (employee: Employee) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
 
-      const res = await API.post("business/auth/first-register", employee);
+      const res = await API.post("admin/auth/first-register", employee);
       const details = { ...res.data.employee, firstName: res.data.authPass };
       delete details._id;
       const person = { _id: res.data.employee._id, details };
@@ -55,10 +55,7 @@ export const aprroveRegisterFirstEmployee = (authPass: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
 
-      const res = await API.post(
-        "business/auth/approve-first-register",
-        authPass
-      );
+      const res = await API.post("admin/auth/approve-first-register", authPass);
       const token = res.data.token;
       localStorage.setItem("token", token);
       localStorage.setItem("isAdmin", "true");
@@ -77,7 +74,7 @@ export const loginEmployee = (form: { phone: string; password: string }) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
 
-      const res = await API.post("business/auth/login", form);
+      const res = await API.post("admin/auth/login", form);
 
       const token = res.data.token;
       const domain = res.data.domain;
@@ -99,7 +96,7 @@ export const resetPasswordEmployee = (phone: string) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
-      const res = await API.post("business/auth/sendResetMessage", { phone });
+      const res = await API.post("admin/auth/sendResetMessage", { phone });
       console.log(res.data.token);
 
       return dispatch({ type: GeneralActionsEnum.SUCCESS_SEND_TOKEN_MSG });
@@ -113,10 +110,7 @@ export const setNewPasswordEmployee = (password: string, token: string) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_AUTH });
-      const res = await API.post(
-        "business/auth/resetPassword/" + token,
-        password
-      );
+      const res = await API.post("admin/auth/resetPassword/" + token, password);
 
       const domain = res.data.domain;
       localStorage.setItem("token", res.data.token);

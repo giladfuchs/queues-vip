@@ -33,8 +33,10 @@ module.exports = (kind) => {
           error404(req.employee);
           break;
         case "client":
+
           req.client = await Client(req.mongo).findById(
             decodedToken.employeeId);
+
           error404(req.client);
           break;
 

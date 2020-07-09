@@ -20,7 +20,7 @@ export const LoginCheck = () => {
     });
     try {
       if (localStorage.getItem("isAdmin")) {
-        const res = await API.get("business");
+        const res = await API.get("admin");
 
         const business = res.data.business;
         const employee = res.data.employee.details;

@@ -8,8 +8,7 @@ import Layout from './models/ui/Layout/layout';
 import { getIsValidDomain, getisLogin, getIsAdmin, getIsTokenSet } from './store/selectors';
 import { LoginCheck } from './store/general/index';
 
-export const baseURL = "http://localhost:8080/";
-// export const baseURL= "https://queue-jz36q4rkyq-uc.a.run.app";
+
 
 const DomainLoginClient = React.lazy(() => {
   return import("./containers/domain/auth/domain-login/client-login.domain");
@@ -23,36 +22,36 @@ const SerivcesClient = React.lazy(() => {
 });
 
 const SerivcesSettings = React.lazy(() => {
-  return import("./containers/business/settings/services/serivces.settings");
+  return import("./containers/admin/settings/services/serivces.settings");
 });
 const OpeningHours = React.lazy(() => {
-  return import("./containers/business/settings/opening-hours/opening-hours.settings");
+  return import("./containers/admin/settings/opening-hours/opening-hours.settings");
 });
 const BusinessSettings = React.lazy(() => {
-  return import("./containers/business/settings/business-settings/business-settings.settings");
+  return import("./containers/admin/settings/business-settings/business-settings.settings");
 });
 
 const CalendarUser = React.lazy(() => {
   return import(
-    "./containers/business/calendar/calendar.business");
+    "./containers/admin/calendar/calendar.business");
 });
 
 
 const BusinessLogin = React.lazy(() => {
-  return import('./containers/business/auth/busniess-login/business-login.business');
+  return import('./containers/admin/auth/busniess-login/business-login.business');
 });
 const BusinessLogout = React.lazy(() => {
-  return import('./containers/business/auth/shared/logout');
+  return import('./containers/admin/auth/shared/logout');
 });
 const BusinessRegister = React.lazy(() => {
-  return import('./containers/business/auth/business-register/business-register.business');
+  return import('./containers/admin/auth/business-register/business-register.business');
 });
 
 const EmployeeReset = React.lazy(() => {
-  return import("./containers/business/auth/busniess-login/reset-password/reset-employee-password.business");
+  return import("./containers/admin/auth/busniess-login/reset-password/reset-employee-password.business");
 });
 
-const SetNewEmployeePassword = React.lazy(() => { return import("./containers/business/auth/busniess-login/reset-password/setNew-employee-password.business") });
+const SetNewEmployeePassword = React.lazy(() => { return import("./containers/admin/auth/busniess-login/reset-password/setNew-employee-password.business") });
 
 const Home = React.lazy(() => {
   return import("./containers/shared/home");
@@ -76,10 +75,10 @@ const App: React.FC<Props> = (props) => {
 
   const { signInCheck, isLogin, isAdmin, isValidDomain, isTokenSet } = props;
   const [routes, setRoutes] = useState<any>(<Switch>
-    <Route path="/business/register" render={() => <BusinessRegister />} />
-    <Route path="/business/login" render={() => <BusinessLogin />} />
-    <Route path="/business/resetpassword/:token" render={(props) => <SetNewEmployeePassword {...props} />} />
-    <Route path="/business/resetpassword" render={() => <EmployeeReset />} />
+    <Route path="/admin/register" render={() => <BusinessRegister />} />
+    <Route path="/admin/login" render={() => <BusinessLogin />} />
+    <Route path="/admin/resetpassword/:token" render={(props) => <SetNewEmployeePassword {...props} />} />
+    <Route path="/admin/resetpassword" render={() => <EmployeeReset />} />
     <Route path="/:domain" render={(props) => <DomainLoginClient {...props} />} />
     <Route path="/" render={() => <Home />} />
 
@@ -99,10 +98,10 @@ const App: React.FC<Props> = (props) => {
     (isLogin && isAdmin) ?
       setRoutes(
         <Switch>
-          <Route path="/business/services" render={() => <SerivcesSettings />} />
-          <Route path="/business/hours" render={() => <OpeningHours />} />
-          <Route path="/business/businesssettings" render={() => <BusinessSettings />} />
-          <Route path="/business/calander" render={() => <CalendarUser />} />
+          <Route path="/admin/services" render={() => <SerivcesSettings />} />
+          <Route path="/admin/hours" render={() => <OpeningHours />} />
+          <Route path="/admin/businesssettings" render={() => <BusinessSettings />} />
+          <Route path="/admin/calander" render={() => <CalendarUser />} />
           <Route path="/logout" render={() => <BusinessLogout />} />
           <Route path="/" render={() => <Home />} />
         </Switch>)

@@ -11,7 +11,7 @@ export const postBusinessDetails = (form: BusinessDetails) => {
   return async (dispatch: any) => {
     try {
       dispatch({ type: GeneralActionsEnum.START_BUSINESS_DETAILS });
-      await API.post("business/details", form);
+      await API.post("admin/details", form);
       dispatch({
         type: dataActionsEnum.SUCCESS_POST_BUSINESS_DETAILS,
         business: form,

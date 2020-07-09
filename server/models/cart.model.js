@@ -1,33 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const temporarySchema = new Schema(
+const cartSchema = new Schema(
     {
-
-        day: {
-            type: String,
+        price: {
+            type: Number,
             required: true,
-        },
-        hour: {
-            type: String,
-            required: true
         },
         duration: {
             type: Number,
             required: true,
         },
         services: [{
-            serviceId: { type: Schema.Types.ObjectId, required: true },
+            serviceId: { type: String, required: true },
             count: { type: Number, required: true },
         }],
-
         clientId: { type: Schema.Types.ObjectId, required: true },
-
-    },
-    {
-        timestamps: true
     }
 );
-temporarySchema.index({ createdAt: 1 }, { expireAfterSeconds: 60 * 5 });
+cartSchema.index({ createdAt: 1 }, { expireAfterSeconds: 60 * 5 });
 module.exports = mongoose.connection.useDb("manager")
-    .model("Cart", temporarySchema);
+    .model("Cart", cartSchema);

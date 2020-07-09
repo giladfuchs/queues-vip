@@ -5,12 +5,14 @@ const {
 } = require("../../utils/error/dbErrorHandler");
 const Service = require("../../models/service.model");
 const Employee = require("../../models/employee.model");
+const Cart = require("../../models/cart.model");
 const { matrix, parseJsonMongo } = require('./queue.helper.controller')
 
 exports.setServiceToQueue = async (req, res, next) => {
   try {
 
     const servicesListOfNewQueue = req.body;
+
     const isValid = Object.keys(servicesListOfNewQueue).reduce((acc, index) => acc + servicesListOfNewQueue[index], 0)
     error404(isValid)
 
@@ -25,7 +27,20 @@ exports.setServiceToQueue = async (req, res, next) => {
     const startMinTime = ans.startMinTime;
     const durationOfNewQueue = ans.durationOfNewQueue;
     const price = ans.price;
+    const serviceCart = Object.keys(servicesListOfNewQueue).map(s => {
+      return {
+        serviceId: s,
+        count: servicesListOfNewQueue[s]
+      }
+    })
 
+    const cart = new Cart({
+      price,
+      duration: durationOfNewQueue,
+      services: serviceCart,
+      clientId: req.client._id
+    })
+    await cart.save();
     error404(ans);
     res.status(201).json({
       msg: "all the queues",
@@ -53,44 +68,53 @@ exports.setServiceToQueue = async (req, res, next) => {
 
 
 
+const io = require('./socket')
 
 const Stripe = require('stripe');
+exports.payment = async (req, res, next) => {
 
-exports.postQueue = async (req, res, next) => {
+  const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
+
   try {
-    // error422(req);
-    // error403Admin(req);
+    const event = stripe.webhooks.constructEvent(
+      req.rawBody, req.get('stripe-signature'),
+      'whsec_UHyYr1CtlHbo5CH02rzjOOPVySSbGV8z'
+    );
+
+    if (event.type === 'payment_intent.succeeded') {
+      const session = event.data.object;
+      console.log("userId", session);
+
+      res.status(200).send({ received: true });
+    }
+    else res.status(200).send({ received: false });
+  } catch (error) {
+    console.log(error);
+
+    res.status(404).send({ error, session });
+  }
+
+
+};
+
+
+exports.cash = async (req, res, next) => {
+  try {
 
     const Queue = require("../../models/queue.model")(req.mongo);
 
 
+    const cart = parseJsonMongo(await Cart.findOne({ clientId: req.client._id }));
+    error404(cart);
+    delete cart['_id'];
 
-    const queue = new Queue({ ...req.body });
+    const queue = new Queue({
+      ...cart,
+      day: req.body.day,
+      hour: req.body.hour
+    });
     await queue.save();
 
-    const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
-    const urlStripe = "https://queues-vip.web.app/";
-    const lineItem = {
-      name: req.client.name,
-      amount: 33,
-      currency: "ILS",
-      quantity: 1,
-
-    };
-    const session = await stripe.checkout.sessions.create({
-      client_reference_id: "clientReferenceId",
-      customer_email: req.client.phone,
-      payment_method_types: ['card'],
-      line_items: [lineItem],
-      payment_intent_data: {
-        description: req.client._id.toString(),
-
-      },
-      success_url: urlStripe,
-      cancel_url: urlStripe,
-    });
-
-    const io = require('./socket')
     io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
     res.status(201).json({
       msg: "create new queue",
@@ -98,7 +122,55 @@ exports.postQueue = async (req, res, next) => {
       session
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+
+    return next(err);
+  }
+};
+
+
+exports.card = async (req, res, next) => {
+  try {
+
+    const Queue = require("../../models/queue.model")(req.mongo);
+
+
+    const cart = parseJsonMongo(await Cart.findOne({ clientId: req.client._id }));
+    error404(cart);
+    delete cart['_id'];
+
+
+
+    const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
+    const urlStripe = "https://queues-vip.web.app/";
+
+    const lineItem = {
+      name: req.client.details.firstName,
+      amount: cart.price * 100,
+      currency: "ILS",
+      quantity: 1,
+
+    };
+    const session = await stripe.checkout.sessions.create({
+      client_reference_id: "clientReferenceId",
+      customer_email: req.client.details.lastName + "@gmail.com",
+      payment_method_types: ['card'],
+      line_items: [lineItem],
+      payment_intent_data: {
+        description: req.mongo.name,
+      },
+      success_url: urlStripe,
+      cancel_url: urlStripe,
+    });
+
+    io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
+    res.status(201).json({
+      msg: "create new queue",
+      queue,
+      session
+    });
+  } catch (err) {
+    // console.log(err);
 
     return next(err);
   }

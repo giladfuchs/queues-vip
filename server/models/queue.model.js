@@ -24,6 +24,10 @@ const SingletonQueueSchema = (() => {
           type: Number,
           required: true,
         },
+        price: {
+          type: Number,
+          required: true,
+        },
         services: [{
           serviceId: { type: Schema.Types.ObjectId, ref: require('./service.model')(mongo), required: true },
           count: Number
