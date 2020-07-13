@@ -52,6 +52,22 @@ const NewQueue: React.FC<OwnProps> = (props) => {
                 <Inputs
                     form={Form} setForm={setForm} error={error} setError={setError}
                 />
+                <p style={{ margin: "5px" }}>
+                    מספר אשראי:
+<br></br>
+4242 4242 4242 4242
+<br></br>
+(אפשר לבחור כל תוקף/3 ספרות תקינים )
+<br></br>
+
+תוקף:
+12/21
+<br></br>
+
+3 ספרות:
+111
+
+                </p>
             </Modal>
         </div>
     )

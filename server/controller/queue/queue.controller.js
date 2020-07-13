@@ -38,7 +38,8 @@ exports.setServiceToQueue = async (req, res, next) => {
       price,
       duration: durationOfNewQueue,
       services: serviceCart,
-      clientId: req.client._id
+      clientId: req.client._id,
+      domain: req.mongo.name
     })
     await cart.save();
     error404(ans);
@@ -57,92 +58,94 @@ exports.setServiceToQueue = async (req, res, next) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
 const io = require('./socket')
 
 const Stripe = require('stripe');
 exports.payment = async (req, res, next) => {
 
   const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
+  console.log("payment");
 
   try {
-    const event = stripe.webhooks.constructEvent(
-      req.rawBody, req.get('stripe-signature'),
-      'whsec_UHyYr1CtlHbo5CH02rzjOOPVySSbGV8z'
-    );
-
+    const event =
+      stripe.webhooks.constructEvent(
+        req.rawBody, req.get('stripe-signature'),
+        'whsec_UHyYr1CtlHbo5CH02rzjOOPVySSbGV8z'
+      );
     if (event.type === 'payment_intent.succeeded') {
-      const session = event.data.object;
-      console.log("userId", session);
+      const session = event.data.object.description.split(',');
 
-      res.status(200).send({ received: true });
+      const cart = parseJsonMongo(await Cart.findOne({ clientId: session[0] }));
+      console.log("cart ", cart.price, " strip ", event.data.object.amount_received, session);
+
+      const mongo = require("mongoose").connection.useDb(cart.domain);
+      const Queue = require("../../models/queue.model")(mongo);
+
+
+      error404(cart);
+      //need transaction
+      await Cart.deleteOne({ _id: cart._id })
+      delete cart['_id'];
+      delete cart['domain']
+      const queue = new Queue({
+        ...cart, isPaid: true,
+        hour: session[1],
+        day: session[2],
+      });
+      await queue.save();
+
+
+      io.getIO().emit('queue', { action: mongo.name, queue: queue })
+      res.status(201).json({
+        msg: "create new queue",
+        queue,
+
+      });
+
     }
-    else res.status(200).send({ received: false });
+    else {
+      const session = req.get('session');
+      const cart = parseJsonMongo(await Cart.findOne({ clientId: session }));
+      const mongo = require("mongoose").connection.useDb(cart.domain);
+      const Queue = require("../../models/queue.model")(mongo);
+
+
+      error404(cart);
+      //need transaction
+      await Cart.deleteOne(cart._id)
+      delete cart['_id'];
+
+      const queue = new Queue({
+        ...cart, isPaid: true,
+        hour: session[1],
+        day: session[2],
+      });
+      await queue.save();
+      console.log(queue);
+
+      res.status(200).send({ received: false });
+    }
   } catch (error) {
     console.log(error);
 
-    res.status(404).send({ error, session });
+    res.status(404).send({ error });
   }
 
 
 };
 
-
-exports.cash = async (req, res, next) => {
-  try {
-
-    const Queue = require("../../models/queue.model")(req.mongo);
-
-
-    const cart = parseJsonMongo(await Cart.findOne({ clientId: req.client._id }));
-    error404(cart);
-    delete cart['_id'];
-
-    const queue = new Queue({
-      ...cart,
-      day: req.body.day,
-      hour: req.body.hour
-    });
-    await queue.save();
-
-    io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
-    res.status(201).json({
-      msg: "create new queue",
-      queue,
-      session
-    });
-  } catch (err) {
-    // console.log(err);
-
-    return next(err);
-  }
-};
 
 
 exports.card = async (req, res, next) => {
   try {
 
-    const Queue = require("../../models/queue.model")(req.mongo);
-
-
     const cart = parseJsonMongo(await Cart.findOne({ clientId: req.client._id }));
     error404(cart);
     delete cart['_id'];
 
-
-
     const stripe = Stripe("sk_test_Vbw1vsnbkqthENhIC7XDf53q00qDVDrcbM");
     const urlStripe = "https://queues-vip.web.app/";
+    console.log(req.body);
 
     const lineItem = {
       name: req.client.details.firstName,
@@ -157,16 +160,15 @@ exports.card = async (req, res, next) => {
       payment_method_types: ['card'],
       line_items: [lineItem],
       payment_intent_data: {
-        description: req.mongo.name,
+        description: [req.client._id.toString(), req.body.hour, req.body.day].join(',')
       },
       success_url: urlStripe,
       cancel_url: urlStripe,
     });
 
-    io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
     res.status(201).json({
       msg: "create new queue",
-      queue,
+
       session
     });
   } catch (err) {
@@ -177,6 +179,39 @@ exports.card = async (req, res, next) => {
 };
 
 
+
+exports.cash = async (req, res, next) => {
+  try {
+
+    const Queue = require("../../models/queue.model")(req.mongo);
+
+
+    const cart = parseJsonMongo(await Cart.findOne({ clientId: req.client._id }));
+    error404(cart);
+
+    //need transaction
+    await Cart.deleteOne({ _id: cart._id })
+    delete cart['_id'];
+
+    const queue = new Queue({
+      ...cart, isPaid: false,
+      day: req.body.day,
+      hour: req.body.hour
+    });
+    await queue.save();
+
+    io.getIO().emit('queue', { action: req.mongo.name, queue: queue })
+    res.status(201).json({
+      msg: "create new queue",
+      queue,
+
+    });
+  } catch (err) {
+    // console.log(err);
+
+    return next(err);
+  }
+};
 
 
 

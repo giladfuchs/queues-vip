@@ -1,7 +1,7 @@
 import axios from "axios";
 export const serverUrl = "http://localhost:8080/";
-
 // export const serverUrl = "https://queue-jz36q4rkyq-uc.a.run.app";
+
 export const API = axios.create({
   baseURL: serverUrl,
   headers: {

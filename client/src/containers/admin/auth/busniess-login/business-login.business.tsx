@@ -70,7 +70,7 @@ const BusinessLogin: React.FC<Props> = (props) => {
                         <React.Fragment>
                             <div className={classes.Button}>
                                 <Button color="purple-register" onClick={() => onClickNext()} disabled={error === ""}>התחבר</Button>
-                                <Link to="/business/resetpassword">{language.restPasswordTitle[1]}</Link>
+                                <Link to="/admin/resetpassword">{language.restPasswordTitle[1]}</Link>
                             </div>
                         </React.Fragment>
                     ) : (
