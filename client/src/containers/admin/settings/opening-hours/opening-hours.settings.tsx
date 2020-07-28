@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HoursStyle from './opening-hours.module.scss';
 import * as days from '../../../../assets';
 import { Day } from '../../../../models/system/day';
-import { ArrowNext } from '../../../../assets';
+import { ArrowNext, def_hour } from '../../../../assets';
 import { Button, SwitchButton, SettingsHeader, Options, Breadcrumbs, Loading } from '../../../../models/ui';
 import { postEmployeeSchedule } from "../../../../store"
 import { getSchedule, getError, getLoading } from "../../../../store/selectors";
@@ -22,15 +22,7 @@ type Props = DispatchProps & StateProps;
 
 
 const OpeningHours: React.FC<Props> = (props) => {
-    const [Hours, setHours] = useState<Day>({
-        "0": [],
-        "1": [],
-        "2": [],
-        "3": [],
-        "4": [],
-        "5": [],
-        "6": []
-    })
+    const [Hours, setHours] = useState<Day>({ ...def_hour })
     useEffect(() => {
         props.schedule && setHours({ ...Hours, ...props.schedule })
         setHeader()
@@ -119,12 +111,13 @@ const OpeningHours: React.FC<Props> = (props) => {
                 <div className={HoursStyle.DaysContent}>
                     {!props.loading ? render : <Loading />}
                 </div>
+                <div className={HoursStyle.Button}>
+                    <Button color="orange" disabled={true} onClick={() => setHours({ ...def_hour, ...props.schedule })}>{language.cancelChange[1]}<ArrowNext /></Button>
+                    <Button color="purple" disabled={true} onClick={saveChange}>{language.saveChange[1]}<ArrowNext /></Button>
+                </div>
             </div>
 
-            <div className={HoursStyle.Button}>
-                <Button color="purple" disabled={true} onClick={saveChange}>{language.saveChange[1]}<ArrowNext /></Button>
-                {/* <Button color="orange" disabled={true} onClick={() => setHours({ ...Hours, ...props.details.schedule })}>{".cancel[1]"}<ArrowNext /></Button> */}
-            </div>
+
         </div>
     )
 }

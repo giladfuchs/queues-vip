@@ -10,13 +10,12 @@ interface OwnProps {
 export const Breadcrumbs: React.FC<OwnProps> = (props) => {
     return (
         <div className={BreadcrumbsStyle.Breadcrumbs}>
-            <p className={BreadcrumbsStyle.Title}>{props.title}</p>
-            <span>|</span>
-            <Link to="buiness/home">
+            <Link to="/admin">
                 <MdHome />
             </Link>
-            <span>></span>
-            <p className={BreadcrumbsStyle.HintTitle}>{props.title}</p>
+            <span>|</span>
+            <p className={BreadcrumbsStyle.Title}>{props.title}</p>
+
         </div>
     )
 }

@@ -1,9 +1,10 @@
 @import "../../../models/style/main.scss";
 
 .Calendar {
-  width: 85vw;
-  margin-right: auto;
-  position: relative;
+  width: 100%;
+  // margin: 50px;
+
+  // position: relative;
 
   @include respond(phone) {
     width: 100vw;
@@ -11,13 +12,16 @@
   }
 
   & .Header {
-    position: absolute;
-    top: 50px;
+    // position: absolute;
+    top: 80px;
     width: 25%;
     display: flex;
     justify-content: space-between;
-    margin-right: 14%;
-
+    align-items: center;
+    margin: 14px;
+    & Button {
+      margin: 3px;
+    }
     @include respond(phone) {
       width: 100%;
       top: 120px;
@@ -27,8 +31,8 @@
   }
 
   & .Content {
-    position: absolute;
-    top: 90px;
+    // position: absolute;
+    // top: 90px;
     height: 90vh;
     width: 100%;
     overflow-y: auto;
@@ -69,7 +73,7 @@
     }
 
     & .TableHeader {
-      height: 60px;
+      height: 40px;
     }
 
     & .Hours {
@@ -78,7 +82,7 @@
 
     & .Slot {
       width: 0;
-      height: 60px;
+      height: 20px;
       transition: all 0.1s ease-in-out;
 
       &:hover {

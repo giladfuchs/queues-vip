@@ -23,6 +23,7 @@ export const Modal: React.FC<OwnProps> = props => {
           <span onClick={props.close}>&times;</span>
         </div>
         <div className={modalStyle.Content}>
+
           {props.children}
         </div>
         <div className={modalStyle.Footer}>

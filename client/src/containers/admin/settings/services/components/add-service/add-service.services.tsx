@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AddServiceStyle from './add-service.module.scss';
 import SerivcesSettingsStyle from '../../../../../../models/ui/header/container-header.module.scss'
 
-import { Inputs, Button, SettingsHeader, SwitchButton, Modal } from '../../../../../../models/ui';
+import { Inputs, Button, AuthenticationHeadrer, SwitchButton, Modal } from '../../../../../../models/ui';
 import { Service, plainText, Form } from '../../../../../../models';
 import * as language from '../../../../../../assets/language/language'
     ;
@@ -67,8 +67,7 @@ const AddService: React.SFC<OwnProps> = (props) => {
     return (
         <Modal title={language.addServiceHeaderTitle[1]} close={props.close} footer={<Footer />}>
 
-            <SettingsHeader title={language.addServiceHeaderTitle[1]} subTitle={language.domainHeaderSubTitle[1]}
-            />
+
             <div className={AddServiceStyle.Body}>
                 {showError && <p className={SerivcesSettingsStyle.Error}>{showError}</p>}
 

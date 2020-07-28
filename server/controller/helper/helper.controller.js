@@ -14,15 +14,16 @@ const transpoter = nodemailer.createTransport(
 );
 
 
-exports.mail = async (email, authPass) => {
-  console.log(email, "mail");
-  sgMail.setApiKey("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");
+const mail = async () => {
+  //   console.log(email, "mail");
+  sgMail.setApiKey("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");
   try {
     const msg = {
-      to: email,
-      from: "queues@vip.com",
-      subject: "אישור הרשמה",
-      html: `<p> סיסמא לאישור הרשמה   <b>${authPass}</b></p>`,
+      to: 'igilfu@gmail.com',
+      from: 'igilfu@gmail.com',
+      subject: 'Sending with SendGrid is Fun',
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
     await sgMail.send(msg);
     console.log("mail sent");
@@ -38,7 +39,11 @@ exports.mail = async (email, authPass) => {
     }
   }
 }
+// setTimeout(() => {
 
+//   mail('igilfu@gmail.com', "11")
+
+// }, 2000)
 exports.createToken = (employee) => {
 
   return jwt.sign(

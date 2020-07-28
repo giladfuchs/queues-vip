@@ -58,6 +58,7 @@ export const hoursHeaderSubTitle = [
 export const open = ["Add New Business", "פתיחה"];
 export const close = ["Add New Business", "סגירה"];
 export const saveChange = ["Add New Business", "שמור שינויים"];
+export const cancelChange = ["Add New Business", "בטל שינויים"];
 
 // Services
 export const servicesHeaderTitle = ["Add New Business", "הוספת שירותים"];

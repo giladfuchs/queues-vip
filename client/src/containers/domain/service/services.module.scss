@@ -9,7 +9,7 @@
 
   & .SerivcesSettings {
     width: 85vw;
-    margin-right: auto;
+    margin: auto;
     animation: fade 0.5s ease-in-out;
 
     @include respond(phone) {

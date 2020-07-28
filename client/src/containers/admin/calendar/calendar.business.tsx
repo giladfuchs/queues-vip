@@ -13,6 +13,7 @@ import * as helper from './components/helper';
 import NewQueue from './components/add-new-queue/add-new-queue.calendar';
 
 import { Client, Service, Queue } from '../../../models/system';
+import { Button } from '../../../models';
 
 
 
@@ -133,9 +134,9 @@ const CalendarUser: React.FC<Props> = (props) => {
                     addNewEvent={addNewEvent} duration={props.durationOfNewQueue} price={props.price} />}
                 <div className={CalendarStyle.Calendar}>
                     <div className={CalendarStyle.Header}>
-                        {/* <Button color='orange' disabled={true} onClick={() => props.updateWeekNumber(props.weekNumber - 1)}>שבוע קודם</Button>
-                    <Button color='purple' disabled={true} onClick={() => props.updateWeekNumber(parseInt(moment(new Date()).format('WW')))}>שבוע נוכחי</Button>
-                    <Button color='orange' disabled={true} onClick={() => props.updateWeekNumber(props.weekNumber + 1)}>שבוע הבא</Button> */}
+                        <Button color='orange' disabled={true} onClick={() => { }}>שבוע קודם</Button>
+                        <Button color='purple' disabled={true} onClick={() => { parseInt(moment(new Date()).format('WW')) }}>שבוע נוכחי</Button>
+                        <Button color='orange' disabled={true} onClick={() => { }}>שבוע הבא</Button>
 
                     </div>
                     <div className={CalendarStyle.Content}>

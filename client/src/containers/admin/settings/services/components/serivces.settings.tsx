@@ -86,9 +86,7 @@ const SerivceComp: React.FC<Props> = (props) => {
                     </tbody>
                 </table>
             </div>
-            <div className={SerivcesSettingsStyle.Button}>
-                <Button color="purple">{language.next[1]}<ArrowNext /></Button>
-            </div>
+
         </React.Fragment>
     )
 }

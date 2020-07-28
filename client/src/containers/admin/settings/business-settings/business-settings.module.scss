@@ -2,7 +2,7 @@
 
 .BusinessSettings {
   width: 85vw;
-  margin-right: auto;
+  margin: auto;
   animation: fade 0.5s ease-in-out;
 
   @include respond(phone) {
@@ -16,6 +16,7 @@
     justify-content: space-around;
     flex-wrap: wrap;
     height: 400px;
+    width: 820px;
 
     @include respond(phone) {
       height: 100%;
@@ -37,7 +38,7 @@
       width: 39%;
       margin: auto;
       text-align: center;
-
+      flex-direction: column;
       @include respond(phone) {
         display: none;
       }
@@ -45,15 +46,31 @@
         width: 350px;
       }
     }
-  }
 
-  & .Button {
-    @include settingsButton;
+    .Head {
+      position: relative;
+      // padding: 10.9rem;
+      margin: auto;
+      // flex-direction: row;
 
-    @include respond(phone) {
-      text-align: center;
+      & .Button {
+        @include settingsButton;
+        position: absolute;
+        left: 50%;
+        // flex-direction: row;
+        text-align: center;
+        align-items: center;
+      }
     }
   }
+
+  // & .Button {
+  //   @include settingsButton;
+
+  //   @include respond(phone) {
+  //     text-align: center;
+  //   }
+  // }
 }
 
 .Error {

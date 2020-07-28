@@ -37,7 +37,6 @@ mongoose
       require('./controller/queue/socket').init(server)
     }
     require("./routes/index.route")(app, mongoose)
-
   }).catch(err => {
     console.log(err);
 

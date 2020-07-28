@@ -2,17 +2,20 @@
 
 .SerivcesSettings {
   width: 85vw;
-  margin-right: auto;
+  margin: auto;
   animation: fade 0.5s ease-in-out;
 
   @include respond(phone) {
     width: 100vw;
     margin-right: 0;
   }
-
+  & .head {
+    display: flex;
+    justify-content: space-between;
+  }
   & button {
-    margin-right: 40px;
-    margin-top: 30px;
+    margin: 5px;
+    flex-direction: row;
 
     @include respond(phone) {
       margin-right: 10px;
@@ -33,18 +36,21 @@
       & .TableHeader {
         & tr {
           display: flex;
+          flex-direction: row;
           justify-content: space-around;
           align-items: center;
+          border-bottom: 1px solid $text-hint;
+
           & th {
             flex: 1;
             padding: 12px 0px;
             font-weight: 500;
-            line-height: 1.5rem;
-            border-bottom: 1px solid $text-hint;
+            line-height: 1.2rem;
+
             color: $text-body;
 
             @include respond(phone) {
-              padding: 15px;
+              padding: 10px;
               padding-top: 0;
               line-height: 1rem;
             }

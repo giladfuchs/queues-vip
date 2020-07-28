@@ -134,9 +134,20 @@ const BusinessSettings: React.FC<Props> = (props) => {
         <React.Fragment>
 
             <div className={BusinessSettingsStyle.BusinessSettings}>
-                {header}
                 {showError && <p className={BusinessSettingsStyle.Error}>{showError}</p>}
+                {props.loading ?
+                    <Loading />
+                    :
+                    <div className={BusinessSettingsStyle.Head}  >
 
+                        {header}
+                        <div className={BusinessSettingsStyle.Button}>
+
+                            {Edit ? <div>     <Button onClick={() => cancel()} color="orange" disabled={true}>ביטול <ArrowNext /></Button>
+                                <Button onClick={() => updateDetails()} color="purple" disabled={true}>שמירה שינויים <ArrowNext /></Button>
+                            </div> : <Button onClick={() => edit()} color="purple" disabled={true}>עריכה <ArrowNext /></Button>
+                            }</div>
+                    </div>}
                 <div className={BusinessSettingsStyle.Body}>
                     <div className={BusinessSettingsStyle.Details}>
                         <Inputs
@@ -148,17 +159,10 @@ const BusinessSettings: React.FC<Props> = (props) => {
                     <div className={BusinessSettingsStyle.Photo}>
                         <img src={postingImg} alt="" />
                     </div>
+
                 </div>
 
-                {props.loading ?
-                    <Loading />
-                    :
 
-                    <div className={BusinessSettingsStyle.Button}>
-                        {Edit ? <div>     <Button onClick={() => cancel()} color="purple" disabled={true}>ביטול <ArrowNext /></Button>
-                            <Button onClick={() => updateDetails()} color="purple" disabled={true}>שמירה שינויים <ArrowNext /></Button>
-                        </div> : <Button onClick={() => edit()} color="purple" disabled={true}>עריכה <ArrowNext /></Button>
-                        }  </div>}
 
             </div>
         </React.Fragment>

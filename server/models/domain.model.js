@@ -18,6 +18,7 @@ const domainchema = new Schema(
     phone: {
       type: String,
       trim: true,
+      unique: true,
       required: true,
       maxlength: 11,
     },

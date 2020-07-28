@@ -7,3 +7,13 @@ export const updateObject = (oldObject: any, updatedProperties: any) => {
     ...updatedProperties,
   };
 };
+
+export const def_hour = {
+  "0": [],
+  "1": [],
+  "2": [],
+  "3": [],
+  "4": [],
+  "5": [],
+  "6": [],
+};

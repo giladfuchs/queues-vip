@@ -18,6 +18,15 @@ module.exports = (app, mongoose) => {
       next(error);
     }
   });
+
+  const connect = (mongo) => {
+    require('../models/service.model')(mongo)
+    require('../models/client.model')(mongo)
+    require('../models/employee.model')(mongo)
+    require('../models/details.model')(mongo)
+    require('../models/queue.model')(mongo)
+
+  }
   app.use('/test', require('./test'))
 
   app.use("/admin", require("./business/index.admin-route"));

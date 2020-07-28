@@ -48,10 +48,13 @@ const SerivceSettings: React.FC<Props> = (props) => {
     return (
         <React.Fragment>
             {Modal && <AddService close={() => setModal(false)} fetchService={ServiceToUpdate ? props.updateService : props.postService} updateService={ServiceToUpdate} error={props.error} />}
-            {header}
             <div className={SerivcesSettingsStyle.SerivcesSettings}>
-                <Breadcrumbs title={language.settingTitleHeader[1]} />
-                <Button onClick={() => setModal(true)} color="purple" disabled={true}>{language.addNewService[1]}</Button>
+                {header}
+                <div className={SerivcesSettingsStyle.head} >
+
+                    <Breadcrumbs title={language.settingTitleHeader[1]} />
+                    <Button onClick={() => setModal(true)} color="purple" disabled={true}>{language.addNewService[1]}</Button>
+                </div>
 
                 <SerivceComp setModal={setModal}
                     setServiceToUpdate={setServiceToUpdate} />

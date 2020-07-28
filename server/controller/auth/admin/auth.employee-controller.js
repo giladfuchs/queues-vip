@@ -91,7 +91,7 @@ const register = async (next, employeeBody) => {
 
 
         await domaina.save();
-
+        // connect(mongo)
         // await session.commitTransaction();
         // session.endSession();
         const token = createToken(employee);
@@ -101,6 +101,16 @@ const register = async (next, employeeBody) => {
     } catch (error) {
         return next(error);
     }
+}
+        // connect(mongo)
+
+const connect = (mongo) => {
+    require('../models/service.model')(mongo)
+    require('../models/client.model')(mongo)
+    require('../models/employee.model')(mongo)
+    require('../models/details.model')(mongo)
+    require('../models/queue.model')(mongo)
+
 }
 
 exports.register = async (req, res, next) => {
